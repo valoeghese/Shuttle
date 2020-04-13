@@ -21,15 +21,15 @@ public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleE
 		EventRegistry.register(this);
 	}
 
-	public static final void log(String message) {
+	public static final void log(Object message) {
 		LOGGER.info(message);
 	}
 
-	public static final void warn(String message) {
+	public static final void warn(Object message) {
 		LOGGER.warn(message);
 	}
 
-	public static final void alert(String message) {
+	public static final void alert(Object message) {
 		LOGGER.error(message);
 	}
 

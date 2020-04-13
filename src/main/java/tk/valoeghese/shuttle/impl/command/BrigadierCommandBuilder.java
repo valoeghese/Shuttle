@@ -1,6 +1,7 @@
 package tk.valoeghese.shuttle.impl.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 
 import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
@@ -14,14 +15,23 @@ public class BrigadierCommandBuilder {
 			LiteralArgumentBuilder<ServerCommandSource> lab = CommandManager.literal(command.getName())
 					.requires(command.getCommandSourcePredicate());
 
+			RequiredArgumentBuilder<ServerCommandSource, ?> builder = null;
+
 			for (CommandParameter arg : command.getCommandArgs()) {
-				lab.then(CommandManager.argument(arg.getName(), arg.getType()));
+				if (builder == null) {
+					lab.then(builder = CommandManager.argument(arg.getName(), arg.getType()));
+				} else {
+					final RequiredArgumentBuilder<ServerCommandSource, ?> oldBuilder = builder;
+					oldBuilder.then(builder = CommandManager.argument(arg.getName(), arg.getType()));
+				}
 			}
 
-			lab.executes(src -> {
+			(builder == null ? lab : builder).executes(src -> {
 				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return command.execute(arguments) ? 0 : 1;
+				return command.execute(arguments) ? 1 : 0;
 			});
+
+			dispatcher.register(lab);
 		});
 	}
 }

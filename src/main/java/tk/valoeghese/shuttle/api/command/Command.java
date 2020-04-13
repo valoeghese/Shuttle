@@ -67,7 +67,7 @@ public class Command {
 	}
 
 	/**
-	 * 
+	 * @return the arguments of the command.
 	 */
 	public CommandParameter[] getCommandArgs() {
 		return this.commandArgs.toArray(new CommandParameter[this.commandArgs.size()]);
