@@ -3,7 +3,13 @@
   "minVersion": "0.8",
   "package": "tk.valoeghese.shuttle.mixin",
   "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "MixinRenderSystem"
+  ],
   "server": [
+    "MixinMinecraftDedicatedServer"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -2,6 +2,8 @@ package tk.valoeghese.shuttle.api.player;
 
 import java.util.UUID;
 
+import tk.valoeghese.shuttle.api.chat.ChatMessage;
+
 /**
  * Interface representing a player on the server, which provides utilities to interact with the said player.
  */

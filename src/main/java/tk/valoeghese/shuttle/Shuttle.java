@@ -1,18 +1,32 @@
 package tk.valoeghese.shuttle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
-import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTickContext;
-import tk.valoeghese.shuttle.impl.ShuttleEvents;
+import tk.valoeghese.shuttle.api.event.SetupEvents.CommandSetupContext;
+import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
+import tk.valoeghese.shuttle.impl.event.ShuttleEvents;
 
 public class Shuttle implements ModInitializer {
+	private static final Logger LOGGER = LogManager.getLogger("Shuttle");
+
 	@Override
 	public void onInitialize() {
-		System.out.println("Shuttle is setting up!");
+		LOGGER.info("Shuttle is setting up!");
+
 		ServerTickCallback.EVENT.register(server -> {
-			ShuttleTickContext context = new ShuttleTickContext(server);
+			TickContext context = new TickContext(server);
 			ShuttleEvents.TICK.postEvent(context);
 			ShuttleEvents.TIMER.postEvent(context);
 		});
+	}
+
+	public static void setupPlugins() {
+		LOGGER.info("Shuttle is setting up plugins!");
+
+		CommandSetupContext context = new CommandSetupContext();
+		ShuttleEvents.SETUP_COMMAND.postEvent(context);
 	}
 }

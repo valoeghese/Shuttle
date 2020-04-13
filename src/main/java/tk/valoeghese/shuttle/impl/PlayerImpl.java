@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
-import tk.valoeghese.shuttle.api.player.ChatMessage;
+import tk.valoeghese.shuttle.api.chat.ChatMessage;
 import tk.valoeghese.shuttle.api.player.Player;
 
 public class PlayerImpl implements Player {

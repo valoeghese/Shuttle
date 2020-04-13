@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.impl;
+package tk.valoeghese.shuttle.impl.event;
 
 import java.util.ArrayList;
 import java.util.List;

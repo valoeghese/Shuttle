@@ -10,7 +10,11 @@ import tk.valoeghese.shuttle.impl.PlayerImpl;
 /**
  * Collection of event interfaces which pertain to the server tick loop.
  */
-public abstract class TickEvents {
+public final class TickEvents {
+	private TickEvents() {
+		// NO-OP
+	}
+
 	/**
 	 * Event Subscriber which is called every tick.
 	 */
@@ -18,7 +22,7 @@ public abstract class TickEvents {
 		/**
 		 * Called every server tick.
 		 */
-		void onTick(ShuttleTickContext context);
+		void onTick(TickContext context);
 	}
 
 	/**
@@ -28,9 +32,9 @@ public abstract class TickEvents {
 		/**
 		 * Called every {@link ShuttleTimerEvent#getTimerTicks n} number of ticks.
 		 */
-		void onTimerCountdown(ShuttleTickContext context);
+		void onTimerCountdown(TickContext context);
 		/**
-		 * Provides the number of ticks, n, where {@link ShuttleTimerEvent#onTimerCountdown(ShuttleTickContext) the event method} is called every n ticks.
+		 * Provides the number of ticks, n, where {@link ShuttleTimerEvent#onTimerCountdown(TickContext) the event method} is called every n ticks.
 		 */
 		int getTimerTicks();
 	}
@@ -38,8 +42,8 @@ public abstract class TickEvents {
 	/**
 	 * Context providing information about the {@link MinecraftServer server} at the current tick.
 	 */
-	public static class ShuttleTickContext implements Context<ShuttleTickEvents> {
-		public ShuttleTickContext(MinecraftServer server) {
+	public static class TickContext implements Context<ShuttleTickEvents> {
+		public TickContext(MinecraftServer server) {
 			List<ServerPlayerEntity> players = server.getPlayerManager().getPlayerList();
 			final int playerCount = players.size();
 			this.players = new Player[playerCount];

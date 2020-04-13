@@ -9,7 +9,7 @@ import tk.valoeghese.shuttle.api.event.ShuttleEvent;
 
 /**
  * {@link ModInitializer} which registers itself to the {@link EventRegistry shuttle event registry} and
- * provides {@link Logger logging} utility methods.
+ * provides {@link Logger logging} and other utility methods.
  */
 public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleEvent {
 	protected static Logger LOGGER;
@@ -31,5 +31,9 @@ public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleE
 
 	public static final void alert(String message) {
 		LOGGER.error(message);
+	}
+
+	public static final int ticks(int minutes, int seconds) {
+		return 20 * (60 * minutes + seconds);
 	}
 }

@@ -1,18 +1,20 @@
 package tk.valoeghese.shuttleexample;
 
 import tk.valoeghese.shuttle.api.ShuttleEventSubscriber;
-import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTickContext;
+import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTimerEvent;
+import tk.valoeghese.shuttle.api.player.Player;
 
 public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerEvent {
 	@Override
-	public void onTimerCountdown(ShuttleTickContext context) {
-		// TODO Auto-generated method stub
-		
+	public void onTimerCountdown(TickContext context) {
+		for (Player player : context.getPlayers()) {
+			player.sendMessage("Hello from Shuttle!");
+		}
 	}
 
 	@Override
 	public int getTimerTicks() {
-		return 20 * 4; // 4 seconds
+		return ticks(0, 4);
 	}
 }

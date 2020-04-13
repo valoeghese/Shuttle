@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.api.player;
+package tk.valoeghese.shuttle.api.chat;
 
 public enum ChatColour {
 	BLACK("§0"),
