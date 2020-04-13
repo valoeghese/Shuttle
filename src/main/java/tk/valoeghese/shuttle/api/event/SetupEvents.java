@@ -26,6 +26,10 @@ public final class SetupEvents {
 	 */
 	public static class CommandSetupContext implements Context<ShuttleCommandSetup> {
 		public void registerCommand(Command command) {
+			if (command.isSubCommand()) {
+				throw new RuntimeException("Cannot directly register a sub command! Sub commands are registered when the main command is registered.");
+			}
+
 			BrigadierCommandBuilder.buildAndRegister(command);
 		}
 	}

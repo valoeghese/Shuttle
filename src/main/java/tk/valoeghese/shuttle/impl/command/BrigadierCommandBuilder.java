@@ -12,19 +12,39 @@ import tk.valoeghese.shuttle.api.command.CommandArguments;
 public class BrigadierCommandBuilder {
 	public static void buildAndRegister(final Command command) {
 		CommandRegistry.INSTANCE.register(false, dispatcher -> {
-			LiteralArgumentBuilder<ServerCommandSource> lab = CommandManager.literal(command.getName())
+			LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal(command.getName())
 					.requires(command.getCommandSourcePredicate());
 
-			CommandParameter[] args = command.getCommandArgs();
-			int max = args.length;
+			// stack sub commands and arguments
+			stackCommands(command.getSubCommands(), command, builder);
 
-			stack(lab, args, 0, max - 1, src -> {
-				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return command.execute(arguments) ? 1 : 0;
-			});
-
-			dispatcher.register(lab);
+			dispatcher.register(builder);
 		});
+	}
+
+	private static void stackCommands(Command[] subCommands, Command parent, ArgumentBuilder<ServerCommandSource, ?> builder) {
+		// add sub commands
+		for (Command command : subCommands) {
+			ArgumentBuilder<ServerCommandSource, ?> next = CommandManager.literal(command.getName());
+			stackCommands(command.getSubCommands(), command, next);
+			builder.then(next);
+		}
+
+		// add normal arguments
+		CommandParameter[] args = parent.getCommandArgs();
+		int max = args.length;
+
+		if (max == 0) {
+			builder.executes(src -> {
+				CommandArguments arguments = new CommandArgumentSupplier(src);
+				return parent.execute(arguments) ? 1 : 0;
+			});
+		} else {
+			stack(builder, args, 0, max - 1, src -> {
+				CommandArguments arguments = new CommandArgumentSupplier(src);
+				return parent.execute(arguments) ? 1 : 0;
+			});
+		}
 	}
 
 	private static void stack(ArgumentBuilder<ServerCommandSource, ?> parent, CommandParameter[] args, int toStack, int target, com.mojang.brigadier.Command<ServerCommandSource> addExec) {

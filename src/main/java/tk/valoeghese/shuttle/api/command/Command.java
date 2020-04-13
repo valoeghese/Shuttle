@@ -13,14 +13,31 @@ import tk.valoeghese.shuttle.impl.command.CommandParameter;
  */
 public class Command {
 	public Command(String name) {
+		this(name, false);
+	}
+
+	private Command(String name, boolean sub) {
 		this.name = name;
+		this.subCommand = sub;
 	}
 
 	private final String name;
+	private final boolean subCommand;
 	private final List<CommandParameter> commandArgs = new ArrayList<>();
+	private final List<Command> subCommands = new ArrayList<>();
 	private int permissionLevel = 0;
 	private boolean onlyPlayerCanUse = false;
 	private CommandCallback callback = CommandCallback.NONE;
+
+	/**
+	 * Adds a sub command to this command, splitting off from the main keyword.
+	 * @return the sub command.
+	 */
+	public Command subCommand(String name) {
+		Command result = new Command(name, true);
+		this.subCommands.add(result);
+		return result;
+	}
 
 	/**
 	 * Sets the permission level required to use this command.
@@ -79,5 +96,19 @@ public class Command {
 	 */
 	public boolean execute(CommandArguments arguments) {
 		return this.callback.execute(arguments);
+	}
+
+	/**
+	 * @return whether the command is a sub command.
+	 */
+	public boolean isSubCommand() {
+		return this.subCommand;
+	}
+
+	/**
+	 * @return an array of sub commands of this command.
+	 */
+	public Command[] getSubCommands() {
+		return this.subCommands.toArray(new Command[this.subCommands.size()]);
 	}
 }

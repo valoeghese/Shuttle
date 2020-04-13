@@ -28,11 +28,20 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 		Command test = new Command("test");
 		test.addCommandArg("thing", CommandArgType.BOOLEAN);
 		test.setCallback(this::test);
+
+		Command other = test.subCommand("other");
+		other.setCallback(this::test2);
+
 		context.registerCommand(test);
 	}
 
 	private boolean test(CommandArguments args) {
 		log(args.getBoolean("thing"));
+		return true;
+	}
+
+	private boolean test2(CommandArguments args) {
+		warn("concern");
 		return true;
 	}
 }
