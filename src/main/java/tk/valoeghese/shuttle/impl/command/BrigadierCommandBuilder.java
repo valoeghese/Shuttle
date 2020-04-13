@@ -1,7 +1,7 @@
 package tk.valoeghese.shuttle.impl.command;
 
+import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 
 import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
@@ -15,23 +15,27 @@ public class BrigadierCommandBuilder {
 			LiteralArgumentBuilder<ServerCommandSource> lab = CommandManager.literal(command.getName())
 					.requires(command.getCommandSourcePredicate());
 
-			RequiredArgumentBuilder<ServerCommandSource, ?> builder = null;
+			CommandParameter[] args = command.getCommandArgs();
+			int max = args.length;
 
-			for (CommandParameter arg : command.getCommandArgs()) {
-				if (builder == null) {
-					lab.then(builder = CommandManager.argument(arg.getName(), arg.getType()));
-				} else {
-					final RequiredArgumentBuilder<ServerCommandSource, ?> oldBuilder = builder;
-					oldBuilder.then(builder = CommandManager.argument(arg.getName(), arg.getType()));
-				}
-			}
-
-			(builder == null ? lab : builder).executes(src -> {
+			stack(lab, args, 0, max - 1, src -> {
 				CommandArguments arguments = new CommandArgumentSupplier(src);
 				return command.execute(arguments) ? 1 : 0;
 			});
 
 			dispatcher.register(lab);
 		});
+	}
+
+	private static void stack(ArgumentBuilder<ServerCommandSource, ?> parent, CommandParameter[] args, int toStack, int target, com.mojang.brigadier.Command<ServerCommandSource> addExec) {
+		ArgumentBuilder<ServerCommandSource, ?> next = CommandManager.argument(args[toStack].getName(), args[toStack].getType());
+
+		if (toStack < target) {
+			stack(next, args, toStack + 1, target, addExec);
+		} else if (toStack == target) {
+			next.executes(addExec);
+		}
+
+		parent.then(next);
 	}
 }
