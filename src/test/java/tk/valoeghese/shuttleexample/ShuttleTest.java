@@ -20,8 +20,10 @@ import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
 import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockBreakEvent;
+import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockPlaceEvent;
 
-public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent {
+public class ShuttleTest extends ShuttleEventSubscriber
+implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent, ShuttlePlayerBlockPlaceEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {
@@ -90,6 +92,15 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 
 	@Override
 	public EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context) {
+		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
+			return EventResult.FAIL;
+		}
+
+		return EventResult.PASS;
+	}
+
+	@Override
+	public EventResult onPlayerBlockPlace(PlayerBlockInteractionContext context) {
 		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
 			return EventResult.FAIL;
 		}
