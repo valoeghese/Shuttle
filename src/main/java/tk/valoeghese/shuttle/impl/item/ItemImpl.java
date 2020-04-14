@@ -31,10 +31,10 @@ public class ItemImpl implements tk.valoeghese.shuttle.api.item.Item {
 		return this.parent.getMaxCount();
 	}
 
-	public static ItemImpl of(Item block) {
-		return ITEMS.computeIfAbsent(block, b -> {
-			String registryName = Registry.ITEM.getId(b).toString();
-			ItemImpl result = new ItemImpl(b, registryName);
+	public static ItemImpl of(Item item) {
+		return ITEMS.computeIfAbsent(item, i -> {
+			String registryName = Registry.ITEM.getId(i).toString();
+			ItemImpl result = new ItemImpl(i, registryName);
 			REGISTRY.put(registryName, result);
 			return result;
 		});
