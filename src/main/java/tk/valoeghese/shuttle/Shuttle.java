@@ -14,7 +14,7 @@ public class Shuttle implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Shuttle is setting up!");
+		LOGGER.info("Shuttle is initialising!");
 
 		ServerTickCallback.EVENT.register(server -> {
 			TickContext context = new TickContext(server);
