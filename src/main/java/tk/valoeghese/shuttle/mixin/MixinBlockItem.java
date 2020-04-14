@@ -19,7 +19,7 @@ import tk.valoeghese.shuttle.impl.world.BlockImpl;
 @Mixin(BlockItem.class)
 public class MixinBlockItem {
 	@Inject(at = @At("HEAD"), method = "canPlace", cancellable = true)
-	private void canPlace(ItemPlacementContext placementContext, BlockState state, CallbackInfoReturnable<Boolean> info) {
+	private void onBlockCanPlace(ItemPlacementContext placementContext, BlockState state, CallbackInfoReturnable<Boolean> info) {
 		PlayerEntity entity = placementContext.getPlayer();
 
 		if (entity instanceof ServerPlayerEntity) {

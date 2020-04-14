@@ -5,9 +5,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
@@ -15,23 +16,27 @@ import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInterac
 import tk.valoeghese.shuttle.impl.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
 
-@Mixin(World.class)
-public class MixinWorld {
-	@Inject(at = @At("HEAD"), method = "breakBlock", cancellable = true)
-	private void breakBlock(BlockPos pos, boolean drop, Entity breakingEntity, CallbackInfoReturnable<Boolean> info) {
-		if (breakingEntity instanceof ServerPlayerEntity) {
+@Mixin(PlayerEntity.class)
+public class MixinPlayerEntity {
+	// why is this called canMine, it's reversed
+	@Inject(at = @At("HEAD"), method = "canMine", cancellable = true)
+	private void cantMine(World world, BlockPos pos, GameMode gameMode, CallbackInfoReturnable<Boolean> info) {
+		if ((Object) this instanceof ServerPlayerEntity) {
 			// create context
 			PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
-					new PlayerImpl((ServerPlayerEntity) breakingEntity),
-					new BlockImpl(((World) (Object) this).getBlockState(pos).getBlock()),
+					new PlayerImpl((ServerPlayerEntity) (Object) this),
+					new BlockImpl(world.getBlockState(pos).getBlock()),
 					pos);
 			// post event
 			ShuttleEvents.PLAYER_BLOCK_BREAK.postEvent(context);
 			// result
-			if (context.getResult() == EventResult.FAIL) {
+			EventResult result = context.getResult();
+
+			if (result == EventResult.FAIL) {
+				info.setReturnValue(true);
+			} else if (result == EventResult.SUCCESS) {
 				info.setReturnValue(false);
 			}
-			// success is default for block break, so no check and action for success needed.
 		}
 	}
 }

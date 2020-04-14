@@ -22,10 +22,11 @@ public final class ShuttleEvents {
 				for (ShuttlePlayerBlockBreakEvent event : events) {
 					EventResult result = event.onPlayerBlockBreak(context);
 
-					if (result.isCancellable()) {
-						if (result == EventResult.FAIL) {
-							context.notifyEvent(0);
-						}
+					if (result == EventResult.FAIL) {
+						context.notifyEvent(0);
+						break;
+					} else if (result == EventResult.SUCCESS) {
+						context.notifyEvent(1);
 						break;
 					}
 				}

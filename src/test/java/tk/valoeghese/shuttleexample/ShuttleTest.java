@@ -91,7 +91,7 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 	@Override
 	public EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context) {
 		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
-			return EventResult.SUCCESS;
+			return EventResult.FAIL;
 		}
 
 		return EventResult.PASS;

@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinBlockItem",
-    "MixinServerWorld",
-    "MixinWorld"
+    "MixinPlayerEntity",
+    "MixinServerWorld"
   ],
   "client": [
     "MixinRenderSystem"
