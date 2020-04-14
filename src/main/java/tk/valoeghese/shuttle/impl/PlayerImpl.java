@@ -4,8 +4,11 @@ import java.util.UUID;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
-import tk.valoeghese.shuttle.api.chat.ChatMessage;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import tk.valoeghese.shuttle.api.chat.ChatMessageBuilder;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.util.Vec2i;
 
 public class PlayerImpl implements Player {
 	public PlayerImpl(ServerPlayerEntity parent) {
@@ -15,7 +18,7 @@ public class PlayerImpl implements Player {
 	private final ServerPlayerEntity parent;
 
 	@Override
-	public String getUsername() {
+	public String getName() {
 		return this.parent.getEntityName();
 	}
 
@@ -30,7 +33,17 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
-	public void sendMessage(ChatMessage message) {
-		this.sendMessage(message.toString());
+	public Vec2i getChunkCoordinates() {
+		return new Vec2i(this.parent.chunkX, this.parent.chunkZ);
+	}
+
+	@Override
+	public Vec3d getCoordinates() {
+		return this.parent.getPos();
+	}
+
+	@Override
+	public BlockPos getBlockCoordinates() {
+		return this.parent.getBlockPos();
 	}
 }

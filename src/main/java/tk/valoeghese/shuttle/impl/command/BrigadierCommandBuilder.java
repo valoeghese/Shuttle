@@ -8,7 +8,10 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.Command;
 import tk.valoeghese.shuttle.api.command.CommandArguments;
-import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
+import tk.valoeghese.shuttle.api.command.CommandExecutor;
+import tk.valoeghese.shuttle.api.command.CommandRuntimeInfo;
+import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.impl.PlayerImpl;
 
 public class BrigadierCommandBuilder {
 	public static void buildAndRegister(final Command command) {
@@ -36,14 +39,20 @@ public class BrigadierCommandBuilder {
 		int max = args.length;
 
 		if (max == 0) {
-			builder.executes(src -> {
-				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return parent.execute(arguments, new TickContext(src.getSource().getMinecraftServer())) ? 1 : 0;
+			builder.executes(context -> {
+				CommandArguments arguments = new CommandArgumentSupplier(context);
+				ServerCommandSource source = context.getSource();
+				// command executor
+				CommandExecutor executor = (source.getEntity() instanceof Player) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
+				return parent.execute(arguments, new CommandRuntimeInfo(executor, source.getMinecraftServer())) ? 1 : 0;
 			});
 		} else {
-			stack(builder, args, 0, max - 1, src -> {
-				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return parent.execute(arguments, new TickContext(src.getSource().getMinecraftServer())) ? 1 : 0;
+			stack(builder, args, 0, max - 1, context -> {
+				CommandArguments arguments = new CommandArgumentSupplier(context);
+				ServerCommandSource source = context.getSource();
+				// command executor
+				CommandExecutor executor = (source.getEntity() instanceof Player) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
+				return parent.execute(arguments, new CommandRuntimeInfo(executor, source.getMinecraftServer())) ? 1 : 0;
 			});
 		}
 	}

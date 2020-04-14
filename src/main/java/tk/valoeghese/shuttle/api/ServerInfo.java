@@ -10,7 +10,7 @@ import tk.valoeghese.shuttle.impl.PlayerImpl;
 /**
  * Class providing information about the {@link MinecraftServer server}.
  */
-public class ServerInfo {
+public abstract class ServerInfo {
 	public ServerInfo(MinecraftServer server) {
 		List<ServerPlayerEntity> players = server.getPlayerManager().getPlayerList();
 		final int playerCount = players.size();

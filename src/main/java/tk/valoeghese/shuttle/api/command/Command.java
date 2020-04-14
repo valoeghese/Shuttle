@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
-import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 import tk.valoeghese.shuttle.impl.command.CommandParameter;
 
 /**
@@ -95,7 +94,7 @@ public class Command {
 	 * Executes the command.
 	 * @param arguments the supplier of command arguments.
 	 */
-	public boolean execute(CommandArguments arguments, TickContext context) {
+	public boolean execute(CommandArguments arguments, CommandRuntimeInfo context) {
 		return this.callback.execute(arguments, context);
 	}
 

@@ -1,14 +1,20 @@
 package tk.valoeghese.shuttle.api.data;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.PersistentState;
+import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
+import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.impl.TagDataTypes;
 
 /**
  * Abstraction of a persistent state compound tag.
  */
 public class WorldTrackedData {
-	public WorldTrackedData(String saveName) {
-		this.tag = new CompoundTag();
+	/**
+	 * Creates a WorldTrackedTata from the Persistent State. Use {@link ShuttleWorldDataEvent#onWorldDataLoad} over directly calling this constructor.
+	 */
+	public WorldTrackedData(String saveName, PersistentState state) {
+		this.tag = state == null ? new CompoundTag() : state.toTag(new CompoundTag());
 		this.saveName = saveName;
 	}
 
@@ -20,6 +26,11 @@ public class WorldTrackedData {
 	public int putInt(String name, int value) {
 		this.tag.putInt(name, value);
 		return value;
+	}
+
+	public Vec2i putVec2i(String name, Vec2i vector) {
+		this.tag.putLong(name, toLong(vector.x, vector.y));
+		return vector;
 	}
 
 	public float putFloat(String name, float value) {
@@ -41,6 +52,10 @@ public class WorldTrackedData {
 
 	public int getInt(String name, int defaultValue) {
 		return this.tag.contains(name, TagDataTypes.INT) ? this.tag.getInt(name) : this.putInt(name, defaultValue);
+	}
+
+	public Vec2i getVec2i(String name, Vec2i defaultValue) {
+		return this.tag.contains(name, TagDataTypes.LONG) ? toVec2i(this.tag.getLong(name)) : this.putVec2i(name, defaultValue);
 	}
 
 	public float getFloat(String name, float defaultValue) {
@@ -66,6 +81,17 @@ public class WorldTrackedData {
 	 * @return the save name of this tracked data
 	 */
 	public String getSaveName() {
-		return saveName;
+		return this.saveName;
+	}
+
+	private static long toLong(int x, int y) {
+		return ((long) x & 0xFFFFFFFFL) | (((long) y & 0xFFFFFFFFL) << 32);
+	}
+
+	private static Vec2i toVec2i(long hash) {
+		int x = (int) (hash & 0xFFFFFFFFL);
+		hash >>= 32;
+		int y = (int) (hash & 0xFFFFFFFFL);
+		return new Vec2i(x, y);
 	}
 }

@@ -12,28 +12,35 @@ import tk.valoeghese.shuttle.api.event.ShuttleEvent;
  * provides {@link Logger logging} and other utility methods.
  */
 public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleEvent {
-	protected static Logger LOGGER;
+	protected Logger LOGGER;
+	private String id;
 
 	@Override
 	public void onInitialize() {
 		String[] names = this.getClass().getName().split("\\.");
-		LOGGER = LogManager.getLogger(names[names.length - 1]);
+		this.id = names[names.length - 1];
+		this.LOGGER = LogManager.getLogger(this.id);
 		EventRegistry.register(this);
 	}
 
-	public static final void log(Object message) {
-		LOGGER.info(message);
+	public final void log(Object message) {
+		this.LOGGER.info(message);
 	}
 
-	public static final void warn(Object message) {
-		LOGGER.warn(message);
+	public final void warn(Object message) {
+		this.LOGGER.warn(message);
 	}
 
-	public static final void alert(Object message) {
-		LOGGER.error(message);
+	public final void alert(Object message) {
+		this.LOGGER.error(message);
 	}
 
 	public static final int ticks(int minutes, int seconds) {
 		return 20 * (60 * minutes + seconds);
+	}
+
+	@Override
+	public String id() {
+		return this.id;
 	}
 }

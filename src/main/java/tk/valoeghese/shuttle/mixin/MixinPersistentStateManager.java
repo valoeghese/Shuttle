@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
@@ -18,12 +19,9 @@ public abstract class MixinPersistentStateManager {
 	@Shadow
 	protected abstract File getFile(String id);
 
-	@Shadow
-	protected abstract void set(PersistentState state);
-
 	@Inject(at = @At("HEAD"), method = "save")
-	private void onSave() {
-		Consumer<PersistentState> stateSetter = this::set;
-		ShuttleInternalEvents.WORLD_DATA.postEvent(new WorldDataContext(stateSetter, false));
+	private void onSave(CallbackInfo info) {
+		Consumer<PersistentState> stateSetter = ((PersistentStateManager) (Object) this)::set;
+		ShuttleInternalEvents.WORLD_DATA.postEvent(new WorldDataContext(false).storeFunction(stateSetter));
 	}
 }

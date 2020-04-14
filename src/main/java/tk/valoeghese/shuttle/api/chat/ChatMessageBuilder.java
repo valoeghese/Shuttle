@@ -1,32 +1,32 @@
 package tk.valoeghese.shuttle.api.chat;
 
-public class ChatMessage {
-	public ChatMessage() {
+public class ChatMessageBuilder {
+	public ChatMessageBuilder() {
 	}
 
 	private final StringBuilder content = new StringBuilder();
 	private ChatColour currentColour = ChatColour.WHITE;
 	private ChatFormat currentFormat = ChatFormat.RESET;
 
-	public ChatMessage append(String string) {
+	public ChatMessageBuilder append(String string) {
 		this.setColour(ChatColour.WHITE, true); // colours reset the format anyway
 		this.content.append(string);
 		return this;
 	}
 
-	public ChatMessage append(String string, ChatColour colour) {
+	public ChatMessageBuilder append(String string, ChatColour colour) {
 		this.setColour(colour, true);
 		this.content.append(string);
 		return this;
 	}
 
-	public ChatMessage append(String string, ChatFormat format) {
+	public ChatMessageBuilder append(String string, ChatFormat format) {
 		this.setFormat(format, true);
 		this.content.append(string);
 		return this;
 	}
 
-	public ChatMessage append(String string, ChatColour colour, ChatFormat format) {
+	public ChatMessageBuilder append(String string, ChatColour colour, ChatFormat format) {
 		this.setColour(colour, true); // apply colour before format!
 		this.setFormat(format, true);
 		this.content.append(string);
