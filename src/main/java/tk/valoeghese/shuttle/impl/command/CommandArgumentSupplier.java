@@ -4,7 +4,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
-import tk.valoeghese.shuttle.api.command.CommandArguments;
+import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 
 public class CommandArgumentSupplier implements CommandArguments {
 	public CommandArgumentSupplier(CommandContext<?> src) {

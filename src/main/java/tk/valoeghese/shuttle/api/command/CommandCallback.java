@@ -1,5 +1,7 @@
 package tk.valoeghese.shuttle.api.command;
 
+import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
+
 /**
  * A callback giving the code to run when the command is executed.
  */

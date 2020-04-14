@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.api.command;
+package tk.valoeghese.shuttle.api.command.arg;
 
 public enum CommandArgType {
 	INTEGER,

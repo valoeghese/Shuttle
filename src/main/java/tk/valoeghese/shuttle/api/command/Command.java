@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
+import tk.valoeghese.shuttle.api.command.arg.CommandArgType;
+import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.impl.command.CommandParameter;
 
 /**

@@ -7,9 +7,9 @@ import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.Command;
-import tk.valoeghese.shuttle.api.command.CommandArguments;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.command.CommandRuntimeInfo;
+import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.impl.PlayerImpl;
 

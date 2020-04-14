@@ -5,7 +5,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import net.minecraft.command.arguments.BlockStateArgumentType;
-import tk.valoeghese.shuttle.api.command.CommandArgType;
+import tk.valoeghese.shuttle.api.command.arg.CommandArgType;
 
 public class CommandParameter {
 	public CommandParameter(String name, CommandArgType type) {

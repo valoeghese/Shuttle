@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.api.command;
+package tk.valoeghese.shuttle.api.command.arg;
 
 /**
  * Supplier of arguments in a command.
