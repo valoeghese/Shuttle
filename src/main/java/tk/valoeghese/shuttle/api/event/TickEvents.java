@@ -14,7 +14,7 @@ public final class TickEvents {
 	/**
 	 * Event Subscriber which is called every tick.
 	 */
-	public static interface ShuttleTickEvent extends ShuttleEvent {
+	public static interface ShuttleTickEvent extends ShuttleEventListener {
 		/**
 		 * Called every server tick.
 		 */
@@ -24,7 +24,7 @@ public final class TickEvents {
 	/**
 	 * Event Subscriber which is called every n number of ticks, where n is the number provided {@link ShuttleTimerEvent#getTimerTicks() here}.
 	 */
-	public static interface ShuttleTimerEvent extends ShuttleEvent {
+	public static interface ShuttleTimerEvent extends ShuttleEventListener {
 		/**
 		 * Called every {@link ShuttleTimerEvent#getTimerTicks n} number of ticks.
 		 */

@@ -1,4 +1,4 @@
 package tk.valoeghese.shuttle.api.event;
 
-public interface Context<T extends ShuttleEvent> {
+public interface Context<T extends ShuttleEventListener> {
 }

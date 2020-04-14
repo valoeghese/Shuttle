@@ -1,6 +1,6 @@
 package tk.valoeghese.shuttle.api.data;
 
-import tk.valoeghese.shuttle.api.event.ShuttleEvent;
+import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 
 /**
  * Collection of event interfaces which relate to the saving and loading of data.
@@ -13,7 +13,7 @@ public final class DataEvents {
 	/**
 	 * Event Subscriber which is called on world data load and save. Use this to load and save your {@link WorldTrackedData} instances.
 	 */
-	public static interface ShuttleWorldDataEvent extends ShuttleEvent {
+	public static interface ShuttleWorldDataEvent extends ShuttleEventListener {
 		/**
 		 * Runs on world data load.
 		 * @param context the context providing an interface for loading world data.

@@ -2,7 +2,7 @@ package tk.valoeghese.shuttle.api.world;
 
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
-import tk.valoeghese.shuttle.api.event.ShuttleEvent;
+import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 import tk.valoeghese.shuttle.api.player.Player;
 
 /**
@@ -16,14 +16,27 @@ public class WorldInteractionEvents {
 	/**
 	 * Event Subscriber which is called when a player attempts to break a block.
 	 */
-	public static interface ShuttlePlayerBlockBreakEvent extends ShuttleEvent {
+	public static interface ShuttlePlayerBlockBreakEvent extends ShuttleEventListener {
 		/**
-		 * Called on player block break;
+		 * Called when a player tries to break a block.
 		 * @return {@link EventResult#FAIL} to cancel the block break,
 		 * {@link EventResult#PASS} to pass the result on to further event processing,
 		 * or {@link EventResult#SUCCESS} to cancel further processing and allow the block break.
 		 */
 		EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context);
+	}
+
+	/**
+	 * Event Subscriber which is called when a player attempts to place a block.
+	 */
+	public static interface ShuttlePlayerBlockPlaceEvent extends ShuttleEventListener {
+		/**
+		 * Called when a player tries to place a block.
+		 * @return {@link EventResult#FAIL} to cancel the block place,
+		 * {@link EventResult#PASS} to pass the result on to further event processing,
+		 * or {@link EventResult#SUCCESS} to cancel further processing and allow the block place.
+		 */
+		EventResult onPlayerBlockPlace(PlayerBlockInteractionContext context);
 	}
 
 	/**
@@ -44,6 +57,6 @@ public class WorldInteractionEvents {
 		}
 	}
 
-	private static interface ShuttlePlayerBlockEvents extends ShuttlePlayerBlockBreakEvent {
+	private static interface ShuttlePlayerBlockEvents extends ShuttlePlayerBlockBreakEvent, ShuttlePlayerBlockPlaceEvent {
 	}
 }

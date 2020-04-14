@@ -14,7 +14,7 @@ public final class SetupEvents {
 	/**
 	 * Event subscriber for setting up and registering commands.
 	 */
-	public static interface ShuttleCommandSetup extends ShuttleEvent {
+	public static interface ShuttleCommandSetup extends ShuttleEventListener {
 		/**
 		 * Called at command setup.
 		 */

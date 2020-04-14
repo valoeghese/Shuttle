@@ -18,9 +18,9 @@ import net.minecraft.world.WorldSaveHandler;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.level.LevelProperties;
 import tk.valoeghese.shuttle.Shuttle;
+import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.impl.data.DummyPersistentState;
 import tk.valoeghese.shuttle.impl.data.WorldDataContext;
-import tk.valoeghese.shuttle.impl.event.ShuttleInternalEvents;
 
 @Mixin(ServerWorld.class)
 public class MixinServerWorld {
@@ -34,7 +34,7 @@ public class MixinServerWorld {
 			// get state manager
 			PersistentStateManager stateManager = self.getPersistentStateManager();
 			// post event
-			ShuttleInternalEvents.WORLD_DATA.postEvent(
+			ShuttleEvents.WORLD_DATA.postEvent(
 					new WorldDataContext(true)
 					.loadFunction(
 							key -> stateManager.get(() -> new DummyPersistentState(key), key)
@@ -51,7 +51,7 @@ public class MixinServerWorld {
 		if (self.getDimension().getType() == DimensionType.OVERWORLD) {
 			Shuttle.LOGGER.info("Saving plugin persistent data");
 			Consumer<PersistentState> stateSetter = self.getPersistentStateManager()::set;
-			ShuttleInternalEvents.WORLD_DATA.postEvent(new WorldDataContext(false).storeFunction(stateSetter));
+			ShuttleEvents.WORLD_DATA.postEvent(new WorldDataContext(false).storeFunction(stateSetter));
 		}
 	}
 }

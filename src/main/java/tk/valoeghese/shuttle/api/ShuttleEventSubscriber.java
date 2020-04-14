@@ -5,13 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 import net.fabricmc.api.ModInitializer;
 import tk.valoeghese.shuttle.api.event.EventRegistry;
-import tk.valoeghese.shuttle.api.event.ShuttleEvent;
+import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 
 /**
  * {@link ModInitializer} which registers itself to the {@link EventRegistry shuttle event registry} and
  * provides {@link Logger logging} and other utility methods.
  */
-public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleEvent {
+public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleEventListener {
 	protected Logger LOGGER;
 	private String id;
 
@@ -20,7 +20,7 @@ public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleE
 		String[] names = this.getClass().getName().split("\\.");
 		this.id = names[names.length - 1];
 		this.LOGGER = LogManager.getLogger(this.id);
-		EventRegistry.register(this);
+		EventRegistry.registerListener(this);
 	}
 
 	public final void log(Object message) {

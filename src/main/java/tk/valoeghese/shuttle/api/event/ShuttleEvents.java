@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.impl.event;
+package tk.valoeghese.shuttle.api.event;
 
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.event.SetupEvents.CommandSetupContext;
@@ -7,8 +7,12 @@ import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTickEvent;
 import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 import tk.valoeghese.shuttle.impl.data.WorldDataContext;
+import tk.valoeghese.shuttle.impl.event.ShuttleEventTracker;
 
-public final class ShuttleInternalEvents {
+/**
+ * Class containing all the setup events
+ */
+public final class ShuttleEvents {
 	public static final ShuttleEventTracker<ShuttleTickEvent, TickContext> TICK = ShuttleEventTracker.of(
 			ShuttleTickEvent.class,
 			TickContext.class,
