@@ -11,7 +11,7 @@ import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.command.CommandRuntimeInfo;
 import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.api.player.Player;
-import tk.valoeghese.shuttle.impl.PlayerImpl;
+import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 
 public class BrigadierCommandBuilder {
 	public static void buildAndRegister(final Command command) {

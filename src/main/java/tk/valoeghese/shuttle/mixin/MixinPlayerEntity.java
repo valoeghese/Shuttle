@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
-import tk.valoeghese.shuttle.impl.PlayerImpl;
+import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
 
 @Mixin(PlayerEntity.class)

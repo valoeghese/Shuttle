@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.impl;
+package tk.valoeghese.shuttle.impl.player;
 
 import java.util.UUID;
 

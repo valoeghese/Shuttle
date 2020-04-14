@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import tk.valoeghese.shuttle.api.player.Player;
-import tk.valoeghese.shuttle.impl.PlayerImpl;
+import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 
 /**
  * Class providing information about the {@link MinecraftServer server}.
