@@ -35,12 +35,12 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 		context.registerCommand(test);
 	}
 
-	private boolean test(CommandArguments args) {
+	private boolean test(CommandArguments args, TickContext context) {
 		log(args.getBoolean("thing"));
 		return true;
 	}
 
-	private boolean test2(CommandArguments args) {
+	private boolean test2(CommandArguments args, TickContext context) {
 		warn("concern");
 		return true;
 	}

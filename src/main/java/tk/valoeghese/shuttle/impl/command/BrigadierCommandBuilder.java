@@ -8,6 +8,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.Command;
 import tk.valoeghese.shuttle.api.command.CommandArguments;
+import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 
 public class BrigadierCommandBuilder {
 	public static void buildAndRegister(final Command command) {
@@ -37,12 +38,12 @@ public class BrigadierCommandBuilder {
 		if (max == 0) {
 			builder.executes(src -> {
 				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return parent.execute(arguments) ? 1 : 0;
+				return parent.execute(arguments, new TickContext(src.getSource().getMinecraftServer())) ? 1 : 0;
 			});
 		} else {
 			stack(builder, args, 0, max - 1, src -> {
 				CommandArguments arguments = new CommandArgumentSupplier(src);
-				return parent.execute(arguments) ? 1 : 0;
+				return parent.execute(arguments, new TickContext(src.getSource().getMinecraftServer())) ? 1 : 0;
 			});
 		}
 	}

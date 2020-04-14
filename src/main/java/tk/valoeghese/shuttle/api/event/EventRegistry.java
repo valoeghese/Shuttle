@@ -5,7 +5,7 @@ import java.util.List;
 
 import tk.valoeghese.shuttle.api.ShuttleEventSubscriber;
 import tk.valoeghese.shuttle.impl.event.ShuttleEventTracker;
-import tk.valoeghese.shuttle.impl.event.ShuttleEvents;
+import tk.valoeghese.shuttle.impl.event.ShuttleInternalEvents;
 
 /**
  * API class where event subscribers are registered. Automatically done by {@link ShuttleEventSubscriber}.
@@ -18,6 +18,9 @@ public final class EventRegistry {
 
 	private static List<ShuttleEventTracker> events = new ArrayList<>();
 
+	/**
+	 * Registers the shuttle event listener.
+	 */
 	public static <T extends ShuttleEvent> void register(ShuttleEvent in) {
 		final Class clazz = in.getClass();
 
@@ -30,9 +33,11 @@ public final class EventRegistry {
 
 	static {
 		// setup
-		events.add(ShuttleEvents.SETUP_COMMAND);
+		events.add(ShuttleInternalEvents.SETUP_COMMAND);
 		// tick loop
-		events.add(ShuttleEvents.TICK);
-		events.add(ShuttleEvents.TIMER);
+		events.add(ShuttleInternalEvents.TICK);
+		events.add(ShuttleInternalEvents.TIMER);
+		// data
+		events.add(ShuttleInternalEvents.WORLD_DATA);
 	}
 }
