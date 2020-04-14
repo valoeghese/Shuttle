@@ -11,11 +11,11 @@ import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataLoadContext;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataSaveContext;
 import tk.valoeghese.shuttle.api.data.WorldTrackedData;
-import tk.valoeghese.shuttle.api.event.SetupEvents.CommandSetupContext;
-import tk.valoeghese.shuttle.api.event.SetupEvents.ShuttleCommandSetup;
-import tk.valoeghese.shuttle.api.event.TickEvents.ShuttleTimerEvent;
-import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
+import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
+import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
+import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 
 public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent {

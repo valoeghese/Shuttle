@@ -1,6 +1,8 @@
-package tk.valoeghese.shuttle.api.event;
+package tk.valoeghese.shuttle.api.server;
 
 import tk.valoeghese.shuttle.api.command.Command;
+import tk.valoeghese.shuttle.api.event.Context;
+import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 import tk.valoeghese.shuttle.impl.command.BrigadierCommandBuilder;
 
 /**
@@ -12,7 +14,7 @@ public final class SetupEvents {
 	}
 
 	/**
-	 * Event subscriber for setting up and registering commands.
+	 * Event Listener for setting up and registering commands.
 	 */
 	public static interface ShuttleCommandSetup extends ShuttleEventListener {
 		/**

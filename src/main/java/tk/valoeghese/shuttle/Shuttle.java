@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
-import tk.valoeghese.shuttle.api.event.SetupEvents.CommandSetupContext;
-import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
+import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
+import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 
 public class Shuttle implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("Shuttle");

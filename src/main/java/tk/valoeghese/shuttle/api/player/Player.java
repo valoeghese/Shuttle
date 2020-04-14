@@ -12,4 +12,12 @@ public interface Player extends CommandExecutor {
 	 * @return the unique identifier of the player.
 	 */
 	UUID getUUID();
+	/**
+	 * @return whether the player is in creative mode.
+	 */
+	boolean isInCreativeMode();
+	/**
+	 * @return whether the player is in spectator mode.
+	 */
+	boolean isInSpectatorMode();
 }

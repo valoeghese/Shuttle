@@ -35,4 +35,8 @@ public interface CommandExecutor {
 	 * @return if an entity/player, the coordinates of the entity/player. Otherwise returns 0, 0, 0.
 	 */
 	Vec3d getCoordinates();
+	/**
+	 * @return the command permission level of the executor.
+	 */
+	PermissionLevel getPermissionLevel();
 }

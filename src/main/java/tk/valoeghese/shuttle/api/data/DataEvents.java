@@ -11,7 +11,7 @@ public final class DataEvents {
 	}
 
 	/**
-	 * Event Subscriber which is called on world data load and save. Use this to load and save your {@link WorldTrackedData} instances.
+	 * Event Listener which is called on world data load and save. Use this to load and save your {@link WorldTrackedData} instances.
 	 */
 	public static interface ShuttleWorldDataEvent extends ShuttleEventListener {
 		/**

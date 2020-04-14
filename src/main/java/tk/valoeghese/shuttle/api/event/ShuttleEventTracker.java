@@ -1,12 +1,12 @@
-package tk.valoeghese.shuttle.impl.event;
+package tk.valoeghese.shuttle.api.event;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import tk.valoeghese.shuttle.api.event.Context;
-import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
-
+/**
+ * Tracker for posting events to listeners.
+ */
 public final class ShuttleEventTracker<T extends ShuttleEventListener, C extends Context<? extends T>> {
 	private ShuttleEventTracker(Class<T> event, Class<C> context, BiConsumer<C, List<T>> handler) {
 		this.eventClass = event;

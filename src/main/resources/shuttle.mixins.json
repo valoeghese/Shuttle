@@ -4,7 +4,9 @@
   "package": "tk.valoeghese.shuttle.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinServerWorld"
+    "MixinBlockItem",
+    "MixinServerWorld",
+    "MixinWorld"
   ],
   "client": [
     "MixinRenderSystem"

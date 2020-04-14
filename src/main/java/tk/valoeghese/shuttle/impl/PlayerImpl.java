@@ -6,6 +6,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import tk.valoeghese.shuttle.api.command.PermissionLevel;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 
@@ -44,5 +45,20 @@ public class PlayerImpl implements Player {
 	@Override
 	public BlockPos getBlockCoordinates() {
 		return this.parent.getBlockPos();
+	}
+
+	@Override
+	public boolean isInCreativeMode() {
+		return this.parent.isCreative();
+	}
+
+	@Override
+	public boolean isInSpectatorMode() {
+		return this.parent.isSpectator();
+	}
+
+	@Override
+	public PermissionLevel getPermissionLevel() {
+		return this.parent.allowsPermissionLevel(2) ? PermissionLevel.OP : PermissionLevel.NORMAL;
 	}
 }

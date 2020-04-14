@@ -1,9 +1,11 @@
 package tk.valoeghese.shuttle.api.world;
 
+import net.minecraft.util.math.BlockPos;
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.world.block.Block;
 
 /**
  * Events which allow for modification of world interaction.
@@ -14,7 +16,7 @@ public class WorldInteractionEvents {
 	}
 
 	/**
-	 * Event Subscriber which is called when a player attempts to break a block.
+	 * Event Listener which is called when a player attempts to break a block.
 	 */
 	public static interface ShuttlePlayerBlockBreakEvent extends ShuttleEventListener {
 		/**
@@ -22,12 +24,13 @@ public class WorldInteractionEvents {
 		 * @return {@link EventResult#FAIL} to cancel the block break,
 		 * {@link EventResult#PASS} to pass the result on to further event processing,
 		 * or {@link EventResult#SUCCESS} to cancel further processing and allow the block break.
+		 * If all event listeners pass, normal block break behaviour happens.
 		 */
 		EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context);
 	}
 
 	/**
-	 * Event Subscriber which is called when a player attempts to place a block.
+	 * Event Listener which is called when a player attempts to place a block.
 	 */
 	public static interface ShuttlePlayerBlockPlaceEvent extends ShuttleEventListener {
 		/**
@@ -35,6 +38,7 @@ public class WorldInteractionEvents {
 		 * @return {@link EventResult#FAIL} to cancel the block place,
 		 * {@link EventResult#PASS} to pass the result on to further event processing,
 		 * or {@link EventResult#SUCCESS} to cancel further processing and allow the block place.
+		 * If all event listeners pass, normal block place behaviour happens.
 		 */
 		EventResult onPlayerBlockPlace(PlayerBlockInteractionContext context);
 	}
@@ -43,17 +47,53 @@ public class WorldInteractionEvents {
 	 * Context providing information about player interaction with blocks in the world.
 	 */
 	public static class PlayerBlockInteractionContext implements Context<ShuttlePlayerBlockEvents> {
-		public PlayerBlockInteractionContext(Player player) {
+		public PlayerBlockInteractionContext(Player player, Block block, BlockPos pos) {
 			this.player = player;
+			this.block = block;
+			this.pos = pos;
 		}
 
 		private final Player player;
+		private final Block block;
+		private final BlockPos pos;
+		private boolean success = false;
+		private boolean fail = false;
 
 		/**
 		 * @return the player interacting with the world.
 		 */
 		public Player getPlayer() {
 			return this.player;
+		}
+
+		/**
+		 * @return the block with which the player is attempting to interact.
+		 */
+		public Block getBlock() {
+			return this.block;
+		}
+
+		/**
+		 * @return the position at which the block the player was trying to interact with sits.
+		 */
+		public BlockPos getPos() {
+			return this.pos;
+		}
+
+		@Override
+		public void notifyEvent(int item) {
+			if (item == 1) {
+				this.success = true;
+			} else if (item == 0) {
+				this.fail = true;
+			}
+		}
+
+		/**
+		 * @return the event result. Used by the implementation.
+		 */
+		public EventResult getResult() {
+			return this.success ? EventResult.SUCCESS : (this.fail ? EventResult.FAIL : EventResult.PASS);
 		}
 	}
 

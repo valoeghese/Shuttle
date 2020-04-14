@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.valoeghese.shuttle.api.ShuttleEventSubscriber;
-import tk.valoeghese.shuttle.impl.event.ShuttleEventTracker;
 
 /**
  * API class where event subscribers are registered. Automatically done by {@link ShuttleEventSubscriber}.
@@ -16,6 +15,7 @@ public final class EventRegistry {
 	}
 
 	private static List<ShuttleEventTracker> events = new ArrayList<>();
+	private static List<ShuttleEventListener> listeners = new ArrayList<>();
 
 	/**
 	 * Registers the specified shuttle event listener.
@@ -28,6 +28,8 @@ public final class EventRegistry {
 				tracker.subscribe(in);
 			}
 		});
+
+		listeners.add(in);
 	}
 
 	/**
@@ -35,6 +37,13 @@ public final class EventRegistry {
 	 */
 	public static void registerEventTracker(ShuttleEventTracker tracker) {
 		events.add(tracker);
+
+		// register listeners in retrograde
+		listeners.forEach(listener -> {
+			if (tracker.getEventClass().isAssignableFrom(listener.getClass())) {
+				tracker.subscribe(listener);
+			}
+		});
 	}
 
 	static {

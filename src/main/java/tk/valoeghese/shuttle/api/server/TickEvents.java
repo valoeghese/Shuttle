@@ -1,7 +1,9 @@
-package tk.valoeghese.shuttle.api.event;
+package tk.valoeghese.shuttle.api.server;
 
 import net.minecraft.server.MinecraftServer;
 import tk.valoeghese.shuttle.api.ServerInfo;
+import tk.valoeghese.shuttle.api.event.Context;
+import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 
 /**
  * Collection of event interfaces which pertain to the server tick loop.
@@ -12,7 +14,7 @@ public final class TickEvents {
 	}
 
 	/**
-	 * Event Subscriber which is called every tick.
+	 * Event Listener which is called every tick.
 	 */
 	public static interface ShuttleTickEvent extends ShuttleEventListener {
 		/**
@@ -22,7 +24,7 @@ public final class TickEvents {
 	}
 
 	/**
-	 * Event Subscriber which is called every n number of ticks, where n is the number provided {@link ShuttleTimerEvent#getTimerTicks() here}.
+	 * Event Listener which is called every n number of ticks, where n is the number provided {@link ShuttleTimerEvent#getTimerTicks() here}.
 	 */
 	public static interface ShuttleTimerEvent extends ShuttleEventListener {
 		/**

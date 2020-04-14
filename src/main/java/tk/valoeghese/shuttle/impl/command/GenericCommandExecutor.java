@@ -6,6 +6,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
+import tk.valoeghese.shuttle.api.command.PermissionLevel;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 
 public class GenericCommandExecutor implements CommandExecutor {
@@ -40,5 +41,10 @@ public class GenericCommandExecutor implements CommandExecutor {
 	@Override
 	public Vec3d getCoordinates() {
 		return this.entity == null ? Vec3d.ZERO : this.entity.getPos();
+	}
+
+	@Override
+	public PermissionLevel getPermissionLevel() {
+		return this.source.hasPermissionLevel(2) ? PermissionLevel.OP : PermissionLevel.NORMAL;
 	}
 }
