@@ -25,7 +25,7 @@ public class MixinPlayerEntity {
 			// create context
 			PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
 					new PlayerImpl((ServerPlayerEntity) (Object) this),
-					new BlockImpl(world.getBlockState(pos).getBlock()),
+					BlockImpl.of(world.getBlockState(pos).getBlock()),
 					pos);
 			// post event
 			ShuttleEvents.PLAYER_BLOCK_BREAK.postEvent(context);

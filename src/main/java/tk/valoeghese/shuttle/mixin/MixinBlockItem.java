@@ -26,7 +26,7 @@ public class MixinBlockItem {
 			// create context
 			PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
 					new PlayerImpl((ServerPlayerEntity) entity),
-					new BlockImpl(state.getBlock()),
+					BlockImpl.of(state.getBlock()),
 					placementContext.getBlockPos());
 			// post event
 			ShuttleEvents.PLAYER_BLOCK_PLACE.postEvent(context);

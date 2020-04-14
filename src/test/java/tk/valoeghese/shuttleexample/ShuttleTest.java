@@ -23,7 +23,8 @@ import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlock
 import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockPlaceEvent;
 
 public class ShuttleTest extends ShuttleEventSubscriber
-implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent, ShuttlePlayerBlockPlaceEvent {
+implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
+ShuttlePlayerBlockPlaceEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {
