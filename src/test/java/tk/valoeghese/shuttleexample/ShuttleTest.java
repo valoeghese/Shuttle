@@ -59,6 +59,8 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 			cxt.getExecutor().sendMessage(this.trackedData.getVec2i(cxt.getExecutor().getName(), Vec2i.ORIGIN).toString());
 			return true;
 		});
+
+		context.registerCommand(trackedDataTest);
 	}
 
 	private boolean test(CommandArguments args, CommandRuntimeInfo context) {

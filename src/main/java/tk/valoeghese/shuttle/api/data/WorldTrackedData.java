@@ -7,7 +7,7 @@ import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.impl.TagDataTypes;
 
 /**
- * Abstraction of a persistent state compound tag.
+ * Abstraction of a persistent state compound tag, common across each server instance.
  */
 public class WorldTrackedData {
 	/**

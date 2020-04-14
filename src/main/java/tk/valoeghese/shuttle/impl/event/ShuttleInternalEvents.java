@@ -33,7 +33,10 @@ public final class ShuttleInternalEvents {
 			WorldDataContext.class,
 			(context, events) -> {
 				if (context.loadingContext) {
-					events.forEach(event -> event.onWorldDataLoad(context));
+					events.forEach(event -> {
+						context.setCurrentEventId(event.pluginId());
+						event.onWorldDataLoad(context);
+					});
 				} else {
 					events.forEach(event -> event.onWorldDataSave(context));
 				}

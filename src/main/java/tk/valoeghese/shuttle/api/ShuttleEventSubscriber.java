@@ -40,7 +40,7 @@ public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleE
 	}
 
 	@Override
-	public String id() {
+	public String pluginId() {
 		return this.id;
 	}
 }

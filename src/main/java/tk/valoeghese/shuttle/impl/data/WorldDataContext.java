@@ -17,11 +17,11 @@ public class WorldDataContext implements WorldDataSaveContext, WorldDataLoadCont
 
 	public final boolean loadingContext;
 	private String currentEventId;
-	private Consumer<PersistentState> storeFunction;
+	private Consumer<PersistentState> setFunction;
 	private Function<String, PersistentState> loadFunction;
 
 	public WorldDataContext storeFunction(Consumer<PersistentState> storeFunction) {
-		this.storeFunction = storeFunction;
+		this.setFunction = storeFunction;
 		return this;
 	}
 
@@ -32,7 +32,7 @@ public class WorldDataContext implements WorldDataSaveContext, WorldDataLoadCont
 
 	@Override
 	public WorldTrackedData loadData(String name) {
-		String saveName = this.currentEventId + "$" + name;
+		String saveName = this.currentEventId + "." + name;
 		PersistentState state = this.loadFunction.apply(saveName);
 		return new WorldTrackedData(saveName, state);
 	}
@@ -41,7 +41,7 @@ public class WorldDataContext implements WorldDataSaveContext, WorldDataLoadCont
 	public void saveData(WorldTrackedData data) {
 		PersistentState state = new DummyPersistentState(data.getSaveName());
 		state.fromTag(data.getTag());
-		this.storeFunction.accept(state);
+		this.setFunction.accept(state);
 	}
 
 	public void setCurrentEventId(String id) {

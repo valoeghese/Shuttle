@@ -13,6 +13,7 @@ public final class DummyPersistentState extends PersistentState {
 	@Override
 	public void fromTag(CompoundTag tag) {
 		this.tag = tag;
+		this.markDirty();
 	}
 
 	@Override

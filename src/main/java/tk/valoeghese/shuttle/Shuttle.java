@@ -10,7 +10,7 @@ import tk.valoeghese.shuttle.api.event.TickEvents.TickContext;
 import tk.valoeghese.shuttle.impl.event.ShuttleInternalEvents;
 
 public class Shuttle implements ModInitializer {
-	private static final Logger LOGGER = LogManager.getLogger("Shuttle");
+	public static final Logger LOGGER = LogManager.getLogger("Shuttle");
 
 	@Override
 	public void onInitialize() {
