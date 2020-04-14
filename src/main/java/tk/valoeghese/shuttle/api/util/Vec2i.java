@@ -17,5 +17,23 @@ public class Vec2i {
 		return "(" + this.x + ", " + this.y + ")";
 	}
 
+	@Override
+	public int hashCode() {
+		// hashcode implementation taken from minecraft's ChunkPos class
+		int i = 1664525 * this.x + 1013904223;
+		int j = 1664525 * (this.y ^ -559038737) + 1013904223;
+		return i ^ j;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Vec2i) {
+			Vec2i other = (Vec2i) obj;
+			return other.x == this.x && other.y == this.y;
+		} else {
+			return false;
+		}
+	}
+
 	public static final Vec2i ORIGIN = new Vec2i(0, 0);
 }

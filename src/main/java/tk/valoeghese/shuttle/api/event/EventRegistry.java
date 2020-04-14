@@ -54,5 +54,8 @@ public final class EventRegistry {
 		registerEventTracker(ShuttleEvents.TIMER);
 		// data
 		registerEventTracker(ShuttleEvents.WORLD_DATA);
+		// world interaction
+		registerEventTracker(ShuttleEvents.PLAYER_BLOCK_BREAK);
+		registerEventTracker(ShuttleEvents.PLAYER_BLOCK_PLACE);
 	}
 }

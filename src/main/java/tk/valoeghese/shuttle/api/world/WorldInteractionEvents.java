@@ -5,6 +5,7 @@ import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
 
 /**
@@ -51,11 +52,13 @@ public class WorldInteractionEvents {
 			this.player = player;
 			this.block = block;
 			this.pos = pos;
+			this.chunkPos = new Vec2i(pos.getX() >> 4, pos.getZ() >> 4);
 		}
 
 		private final Player player;
 		private final Block block;
 		private final BlockPos pos;
+		private final Vec2i chunkPos;
 		private boolean success = false;
 		private boolean fail = false;
 
@@ -74,10 +77,17 @@ public class WorldInteractionEvents {
 		}
 
 		/**
-		 * @return the position at which the block the player was trying to interact with sits.
+		 * @return the position where the block the player is trying to interact with is.
 		 */
-		public BlockPos getPos() {
+		public BlockPos getBlockPos() {
 			return this.pos;
+		}
+
+		/**
+		 * @return the chunk position where the block the player is trying to interact with is.
+		 */
+		public Vec2i getChunkPos() {
+			return this.chunkPos;
 		}
 
 		@Override

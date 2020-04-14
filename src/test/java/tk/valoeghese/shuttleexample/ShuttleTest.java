@@ -11,14 +11,17 @@ import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataLoadContext;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataSaveContext;
 import tk.valoeghese.shuttle.api.data.WorldTrackedData;
+import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockBreakEvent;
 
-public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent {
+public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {
@@ -83,5 +86,14 @@ public class ShuttleTest extends ShuttleEventSubscriber implements ShuttleTimerE
 	@Override
 	public void onWorldDataSave(WorldDataSaveContext context) {
 		context.saveData(this.trackedData);
+	}
+
+	@Override
+	public EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context) {
+		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
+			return EventResult.SUCCESS;
+		}
+
+		return EventResult.PASS;
 	}
 }
