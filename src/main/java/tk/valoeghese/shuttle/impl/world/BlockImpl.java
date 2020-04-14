@@ -8,11 +8,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlockImpl implements tk.valoeghese.shuttle.api.world.block.Block {
-	private BlockImpl(Block block) {
+	private BlockImpl(Block block, String registryName) {
 		this.parent = block;
+		this.registryName = registryName;
 	}
 
 	private final Block parent;
+	private final String registryName;
 
 	@Override
 	public Block getRawBlock() {
@@ -21,13 +23,14 @@ public class BlockImpl implements tk.valoeghese.shuttle.api.world.block.Block {
 
 	@Override
 	public String getRegistryName() {
-		return Registry.BLOCK.getId(this.parent).toString();
+		return this.registryName;
 	}
 
 	public static BlockImpl of(Block block) {
 		return BLOCKS.computeIfAbsent(block, b -> {
-			BlockImpl result = new BlockImpl(b);
-			REGISTRY.put(Registry.BLOCK.getId(b).toString(), result);
+			String registryName = Registry.BLOCK.getId(b).toString();
+			BlockImpl result = new BlockImpl(b, registryName);
+			REGISTRY.put(registryName, result);
 			return result;
 		});
 	}
@@ -35,8 +38,8 @@ public class BlockImpl implements tk.valoeghese.shuttle.api.world.block.Block {
 	public static BlockImpl of(String registryName) {
 		return REGISTRY.computeIfAbsent(registryName, n -> {
 			Block block = Registry.BLOCK.get(new Identifier(n));
-			BlockImpl result = new BlockImpl(block);
-			REGISTRY.put(registryName, result);
+			BlockImpl result = new BlockImpl(block, registryName);
+			BLOCKS.put(block, result);
 			return result;
 		});
 	}

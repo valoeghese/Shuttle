@@ -8,11 +8,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ItemImpl implements tk.valoeghese.shuttle.api.item.Item {
-	private ItemImpl(Item item) {
+	private ItemImpl(Item item, String registryName) {
 		this.parent = item;
+		this.registryName = registryName;
 	}
 
 	private final Item parent;
+	private final String registryName;
 
 	@Override
 	public Item getRawItem() {
@@ -21,13 +23,19 @@ public class ItemImpl implements tk.valoeghese.shuttle.api.item.Item {
 
 	@Override
 	public String getRegistryName() {
-		return Registry.ITEM.getId(this.parent).toString();
+		return this.registryName;
+	}
+
+	@Override
+	public int getMaxStackSize() {
+		return this.parent.getMaxCount();
 	}
 
 	public static ItemImpl of(Item block) {
 		return ITEMS.computeIfAbsent(block, b -> {
-			ItemImpl result = new ItemImpl(b);
-			REGISTRY.put(Registry.ITEM.getId(b).toString(), result);
+			String registryName = Registry.ITEM.getId(b).toString();
+			ItemImpl result = new ItemImpl(b, registryName);
+			REGISTRY.put(registryName, result);
 			return result;
 		});
 	}
@@ -35,8 +43,8 @@ public class ItemImpl implements tk.valoeghese.shuttle.api.item.Item {
 	public static ItemImpl of(String registryName) {
 		return REGISTRY.computeIfAbsent(registryName, n -> {
 			Item item = Registry.ITEM.get(new Identifier(n));
-			ItemImpl result = new ItemImpl(item);
-			REGISTRY.put(registryName, result);
+			ItemImpl result = new ItemImpl(item, n);
+			ITEMS.put(item, result);
 			return result;
 		});
 	}

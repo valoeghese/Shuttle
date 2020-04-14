@@ -14,6 +14,10 @@ public interface Item {
 	 * @return the vanilla registry id of the item.
 	 */
 	String getRegistryName();
+	/**
+	 * @return the maximum number of items a stack of this item can hold.
+	 */
+	int getMaxStackSize();
 
 	/**
 	 * @return an item for the given registry id. For example, minecraft:stick gives an instnace representing the stick item.
