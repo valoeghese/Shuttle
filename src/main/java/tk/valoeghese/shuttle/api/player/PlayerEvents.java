@@ -1,18 +1,18 @@
-package tk.valoeghese.shuttle.api.world;
+package tk.valoeghese.shuttle.api.player;
 
 import net.minecraft.util.math.BlockPos;
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
-import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.world.World;
 import tk.valoeghese.shuttle.api.world.block.Block;
 
 /**
- * Events which allow for modification of world interaction.
+ * Events to do with the player.
  */
-public class WorldInteractionEvents {
-	private WorldInteractionEvents() {
+public class PlayerEvents {
+	private PlayerEvents() {
 		// NO-OP
 	}
 
@@ -48,14 +48,16 @@ public class WorldInteractionEvents {
 	 * Context providing information about player interaction with blocks in the world.
 	 */
 	public static class PlayerBlockInteractionContext implements Context<ShuttlePlayerBlockEvents> {
-		public PlayerBlockInteractionContext(Player player, Block block, BlockPos pos) {
+		public PlayerBlockInteractionContext(Player player, World world, Block block, BlockPos pos) {
 			this.player = player;
 			this.block = block;
 			this.pos = pos;
+			this.world = world;
 			this.chunkPos = new Vec2i(pos.getX() >> 4, pos.getZ() >> 4);
 		}
 
 		private final Player player;
+		private final World world;
 		private final Block block;
 		private final BlockPos pos;
 		private final Vec2i chunkPos;
@@ -67,6 +69,13 @@ public class WorldInteractionEvents {
 		 */
 		public Player getPlayer() {
 			return this.player;
+		}
+
+		/**
+		 * @return the world the player is interacting with.
+		 */
+		public World getWorld() {
+			return this.world;
 		}
 
 		/**

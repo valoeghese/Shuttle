@@ -7,14 +7,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
+import tk.valoeghese.shuttle.impl.world.WorldImpl;
 
 @Mixin(PlayerEntity.class)
 public class MixinPlayerEntity {
@@ -25,6 +27,7 @@ public class MixinPlayerEntity {
 			// create context
 			PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
 					new PlayerImpl((ServerPlayerEntity) (Object) this),
+					new WorldImpl((ServerWorld) world),
 					BlockImpl.of(world.getBlockState(pos).getBlock()),
 					pos);
 			// post event

@@ -1,14 +1,14 @@
 package tk.valoeghese.shuttle.api.event;
 
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTickEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockBreakEvent;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockPlaceEvent;
 import tk.valoeghese.shuttle.impl.data.WorldDataContext;
 
 /**

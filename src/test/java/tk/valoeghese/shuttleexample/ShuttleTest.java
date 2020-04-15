@@ -13,14 +13,14 @@ import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataSaveContext;
 import tk.valoeghese.shuttle.api.data.WorldTrackedData;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.PlayerBlockInteractionContext;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockBreakEvent;
-import tk.valoeghese.shuttle.api.world.WorldInteractionEvents.ShuttlePlayerBlockPlaceEvent;
 
 public class ShuttleTest extends ShuttleEventSubscriber
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
