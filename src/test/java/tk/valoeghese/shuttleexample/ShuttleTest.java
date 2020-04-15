@@ -96,6 +96,7 @@ ShuttlePlayerBlockPlaceEvent {
 	@Override
 	public EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context) {
 		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
+			context.getWorld().setBlock(context.getBlockPos(), GOLD_BLOCK);
 			return EventResult.FAIL;
 		}
 
