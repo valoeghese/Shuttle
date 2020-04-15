@@ -2,6 +2,7 @@ package tk.valoeghese.shuttle.api.event;
 
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
@@ -32,9 +33,9 @@ public final class ShuttleEvents {
 				}
 			});
 
-	public static final ShuttleEventTracker<ShuttlePlayerBlockPlaceEvent, PlayerBlockInteractionContext> PLAYER_BLOCK_PLACE = ShuttleEventTracker.of(
+	public static final ShuttleEventTracker<ShuttlePlayerBlockPlaceEvent, PlayerBlockPlacementContext> PLAYER_BLOCK_PLACE = ShuttleEventTracker.of(
 			ShuttlePlayerBlockPlaceEvent.class,
-			PlayerBlockInteractionContext.class,
+			PlayerBlockPlacementContext.class,
 			(context, events) -> {
 				for (ShuttlePlayerBlockPlaceEvent event : events) {
 					EventResult result = event.onPlayerBlockPlace(context);

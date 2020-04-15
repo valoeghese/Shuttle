@@ -41,7 +41,7 @@ public class PlayerEvents {
 		 * or {@link EventResult#SUCCESS} to cancel further processing and allow the block place.
 		 * If all event listeners pass, normal block place behaviour happens.
 		 */
-		EventResult onPlayerBlockPlace(PlayerBlockInteractionContext context);
+		EventResult onPlayerBlockPlace(PlayerBlockPlacementContext context);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class PlayerEvents {
 
 		private final Player player;
 		private final World world;
-		private final Block block;
+		protected Block block;
 		private final BlockPos pos;
 		private final Vec2i chunkPos;
 		private boolean success = false;
@@ -113,6 +113,33 @@ public class PlayerEvents {
 		 */
 		public EventResult getResult() {
 			return this.success ? EventResult.SUCCESS : (this.fail ? EventResult.FAIL : EventResult.PASS);
+		}
+	}
+
+	/**
+	 * {@link PlayerBlockPlacementContext} providing more utilities specific to block placement.
+	 */
+	public static class PlayerBlockPlacementContext extends PlayerBlockInteractionContext {
+		public PlayerBlockPlacementContext(Player player, World world, Block block, BlockPos pos) {
+			super(player, world, block, pos);
+		}
+
+		private boolean modifiedBlock = false;
+
+		/**
+		 * Sets the block to be placed by the player.
+		 * @param block the block to set to be placed.
+		 */
+		public void setBlock(Block block) {
+			this.modifiedBlock = true;
+			this.block = block;
+		}
+
+		/**
+		 * @return whether an event subscriber has modified the resulting block. Used by the implementation.
+		 */
+		public boolean blockModified() {
+			return this.modifiedBlock;
 		}
 	}
 

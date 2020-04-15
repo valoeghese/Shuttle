@@ -14,6 +14,7 @@ import tk.valoeghese.shuttle.api.data.WorldTrackedData;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
+import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
@@ -21,6 +22,7 @@ import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.world.block.Block;
 
 public class ShuttleTest extends ShuttleEventSubscriber
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
@@ -101,11 +103,14 @@ ShuttlePlayerBlockPlaceEvent {
 	}
 
 	@Override
-	public EventResult onPlayerBlockPlace(PlayerBlockInteractionContext context) {
+	public EventResult onPlayerBlockPlace(PlayerBlockPlacementContext context) {
 		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
 			return EventResult.FAIL;
 		}
 
+		context.setBlock(GOLD_BLOCK);
 		return EventResult.PASS;
 	}
+
+	public static final Block GOLD_BLOCK = Block.get("minecraft:gold_block");
 }
