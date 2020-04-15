@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import tk.valoeghese.shuttle.api.event.EventResult;
@@ -39,6 +40,7 @@ public class MixinBlockItem {
 			EventResult result = context.getResult();
 
 			if (result == EventResult.FAIL) {
+				placementContext.getPlayer().giveItemStack(new ItemStack((BlockItem) (Object) this));
 				info.setReturnValue(null);
 			} else if (result == EventResult.SUCCESS || (state != null && context.blockModified())) {
 				// also check for non-null results in case block is changed.
