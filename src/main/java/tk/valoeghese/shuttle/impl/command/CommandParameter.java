@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import net.minecraft.command.arguments.BlockStateArgumentType;
+import net.minecraft.command.arguments.ItemStackArgumentType;
 import tk.valoeghese.shuttle.api.command.arg.CommandArgType;
 
 public class CommandParameter {
@@ -32,6 +33,8 @@ public class CommandParameter {
 			return BoolArgumentType.bool();
 		case BLOCK:
 			return BlockStateArgumentType.blockState();
+		case ITEM:
+			return ItemStackArgumentType.itemStack();
 		default:
 			return null;
 		}
