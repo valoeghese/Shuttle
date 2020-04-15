@@ -7,15 +7,18 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import tk.valoeghese.shuttle.api.command.PermissionLevel;
+import tk.valoeghese.shuttle.api.player.Inventory;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 
 public class PlayerImpl implements Player {
 	public PlayerImpl(ServerPlayerEntity parent) {
 		this.parent = parent;
+		this.inventory = new PlayerInventoryImpl(this.parent.inventory);
 	}
 
 	private final ServerPlayerEntity parent;
+	private final PlayerInventoryImpl inventory;
 
 	@Override
 	public String getName() {
@@ -60,5 +63,10 @@ public class PlayerImpl implements Player {
 	@Override
 	public PermissionLevel getPermissionLevel() {
 		return this.parent.allowsPermissionLevel(2) ? PermissionLevel.OP : PermissionLevel.NORMAL;
+	}
+
+	@Override
+	public Inventory getInventory() {
+		return this.inventory;
 	}
 }

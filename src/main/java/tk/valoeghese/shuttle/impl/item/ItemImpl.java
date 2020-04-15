@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -51,4 +52,5 @@ public class ItemImpl implements tk.valoeghese.shuttle.api.item.Item {
 
 	public static final Map<Item, ItemImpl> ITEMS = new HashMap<>();
 	public static final Map<String, ItemImpl> REGISTRY = new HashMap<>();
+	public static final ItemImpl AIR = of(Items.AIR);
 }

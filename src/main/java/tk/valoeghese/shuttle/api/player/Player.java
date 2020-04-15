@@ -20,4 +20,8 @@ public interface Player extends CommandExecutor {
 	 * @return whether the player is in spectator mode.
 	 */
 	boolean isInSpectatorMode();
+	/**
+	 * @return the player's inventory.
+	 */
+	Inventory getInventory();
 }
