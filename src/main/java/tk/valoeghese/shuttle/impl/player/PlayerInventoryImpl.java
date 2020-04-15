@@ -70,4 +70,9 @@ public class PlayerInventoryImpl implements Inventory {
 	public int getCountOf(Item item) {
 		return this.parent.countInInv(item.getRawItem());
 	}
+
+	@Override
+	public int getSelectedSlot() {
+		return this.parent.selectedSlot;
+	}
 }

@@ -47,4 +47,8 @@ public interface Inventory {
 	 * @return the number if items of the specified type in the inventory.
 	 */
 	int getCountOf(Item item);
+	/**
+	 * @return the slot the player of this inventory currently has selected - i.e. what slot they are using currently.
+	 */
+	int getSelectedSlot();
 }
