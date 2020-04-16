@@ -1,5 +1,7 @@
 package tk.valoeghese.shuttleexample;
 
+import java.util.Random;
+
 import tk.valoeghese.shuttle.api.ShuttlePlugin;
 import tk.valoeghese.shuttle.api.chat.ChatColour;
 import tk.valoeghese.shuttle.api.chat.ChatMessageBuilder;
@@ -23,6 +25,9 @@ import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.api.world.dimension.Dimensions;
+import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
 
 public class ShuttleTest extends ShuttlePlugin
@@ -115,4 +120,31 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent {
 	}
 
 	public static final Block GOLD_BLOCK = Block.get("minecraft:gold_block");
+
+	@Override
+	public void onChunkShape(ChunkShapeContext context) {
+		GeneratingChunk chunk = context.getChunk();
+
+		// If in the nether
+		if (chunk.getDimension() == Dimensions.NETHER) {
+			Random random = context.getRandom();
+
+			// a random one-in-three chance per chunk
+			if (random.nextInt(3) == 0) {
+				// pick local chunk x and z at random
+				int x = random.nextInt(16);
+				int z = random.nextInt(16);
+
+				// count down from y = 127 to y = 0
+				for (int y = 127; y >= 0; --y) {
+					// one in 5 chance to set gold block
+					if (random.nextInt(5) == 0) {
+						if (chunk.getBlock(x, y, z) == context.getDefaultBlock()) {
+							chunk.setBlock(x, y, z, GOLD_BLOCK);
+						}
+					}
+				}
+			}
+		}
+	}
 }

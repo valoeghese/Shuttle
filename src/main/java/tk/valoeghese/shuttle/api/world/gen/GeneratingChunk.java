@@ -1,5 +1,6 @@
 package tk.valoeghese.shuttle.api.world.gen;
 
+import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
@@ -34,4 +35,16 @@ public interface GeneratingChunk {
 	 * @return the sea level of the chunk.
 	 */
 	int getSeaLevel();
+	/**
+	 * @return the chunk x position of the chunk (relative to other chunks in a grid)
+	 */
+	int getChunkX();
+	/**
+	 * @return the chunk z position of the chunk (relative to other chunks in a grid)
+	 */
+	int getChunkZ();
+	/**
+	 * @return the position of the chunk in the 'chunk grid' of the world.
+	 */
+	Vec2i getChunkPos();
 }

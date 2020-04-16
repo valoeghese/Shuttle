@@ -1,5 +1,7 @@
 package tk.valoeghese.shuttle.api.world.gen;
 
+import java.util.Random;
+
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
 import tk.valoeghese.shuttle.api.world.block.Block;
@@ -27,14 +29,16 @@ public final class WorldGenEvents {
 	 * Context providing the chunk that is being shaped and other utilities.
 	 */
 	public static class ChunkShapeContext implements Context<ShuttleChunkShapeEvent> {
-		public ChunkShapeContext(GeneratingChunk chunk, Block defaultBlock, Block defaultFluid) {
+		public ChunkShapeContext(GeneratingChunk chunk, Block defaultBlock, Block defaultFluid, Random random) {
 			this.chunk = chunk;
 			this.defaultBlock = defaultBlock;
 			this.defaultFluid = defaultFluid;
+			this.random = random;
 		}
 
 		private final GeneratingChunk chunk;
 		private final Block defaultBlock, defaultFluid;
+		private final Random random;
 
 		/**
 		 * @return the default block of the chunk, used to represent where there will be a solid block. Usually stone.
@@ -55,6 +59,13 @@ public final class WorldGenEvents {
 		 */
 		public GeneratingChunk getChunk() {
 			return this.chunk;
+		}
+
+		/**
+		 * @return a random instance for generation
+		 */
+		public Random getRandom() {
+			return this.random;
 		}
 	}
 }

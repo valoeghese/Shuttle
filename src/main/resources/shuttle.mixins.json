@@ -6,7 +6,8 @@
   "mixins": [
     "MixinBlockItem",
     "MixinServerPlayerInteractionManager",
-    "MixinServerWorld"
+    "MixinServerWorld",
+    "MixinSurfaceChunkGenerator"
   ],
   "client": [
     "MixinRenderSystem"
