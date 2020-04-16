@@ -3,10 +3,10 @@ package tk.valoeghese.shuttle.api.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import tk.valoeghese.shuttle.api.ShuttleEventSubscriber;
+import tk.valoeghese.shuttle.api.ShuttlePlugin;
 
 /**
- * API class where event subscribers are registered. Automatically done by {@link ShuttleEventSubscriber}.
+ * API class where event subscribers are registered. Automatically done by {@link ShuttlePlugin}.
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class EventRegistry {

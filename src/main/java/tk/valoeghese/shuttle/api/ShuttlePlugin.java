@@ -11,7 +11,7 @@ import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
  * {@link ModInitializer} which registers itself to the {@link EventRegistry shuttle event registry} and
  * provides {@link Logger logging} and other utility methods.
  */
-public abstract class ShuttleEventSubscriber implements ModInitializer, ShuttleEventListener {
+public abstract class ShuttlePlugin implements ModInitializer, ShuttleEventListener {
 	protected Logger LOGGER;
 	private String id;
 

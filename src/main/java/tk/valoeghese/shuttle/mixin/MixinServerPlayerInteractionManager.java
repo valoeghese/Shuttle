@@ -36,6 +36,7 @@ public class MixinServerPlayerInteractionManager {
 		// result
 		EventResult result = context.getResult();
 
+		// yes it's reversed, it returns whether it *can't* mine
 		if (result == EventResult.FAIL) {
 			return true;
 		} else if (result == EventResult.SUCCESS) {

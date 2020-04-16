@@ -1,6 +1,6 @@
 package tk.valoeghese.shuttleexample;
 
-import tk.valoeghese.shuttle.api.ShuttleEventSubscriber;
+import tk.valoeghese.shuttle.api.ShuttlePlugin;
 import tk.valoeghese.shuttle.api.chat.ChatColour;
 import tk.valoeghese.shuttle.api.chat.ChatMessageBuilder;
 import tk.valoeghese.shuttle.api.command.Command;
@@ -24,7 +24,7 @@ import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
 
-public class ShuttleTest extends ShuttleEventSubscriber
+public class ShuttleTest extends ShuttlePlugin
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
 ShuttlePlayerBlockPlaceEvent {
 	@Override
