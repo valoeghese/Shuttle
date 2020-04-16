@@ -1,24 +1,29 @@
 package tk.valoeghese.shuttle.api.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.PersistentState;
+import tk.valoeghese.shuttle.Unstable;
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.impl.TagDataTypes;
 
 /**
- * Abstraction of a persistent state compound tag, common across each server instance.
+ * Abstraction of a persistent state compound tag, common across all dimensions in the server world.
  */
-public class WorldTrackedData {
+public class PersistentData {
 	/**
 	 * Creates a WorldTrackedTata from the Persistent State. Use {@link ShuttleWorldDataEvent#onWorldDataLoad} over directly calling this constructor.
 	 */
-	public WorldTrackedData(String saveName, PersistentState state) {
-		this.tag = state == null ? new CompoundTag() : state.toTag(new CompoundTag());
+	@Unstable
+	public PersistentData(String saveName, CompoundTag tag) {
 		this.saveName = saveName;
+		this.tag = tag;
 	}
 
 	private final CompoundTag tag;
+	private final Map<String, PersistentData> subData = new HashMap<>();
 	private final String saveName;
 
 	// value setters
@@ -68,6 +73,39 @@ public class WorldTrackedData {
 
 	public boolean getBoolean(String name, boolean defaultValue) {
 		return this.tag.contains(name, TagDataTypes.BYTE) ? this.tag.getBoolean(name) : this.putBoolean(name, defaultValue);
+	}
+
+	/**
+	 * @return the {@link PersistentData} sub data instance, if it exists. Otherwise return null.
+	 */
+	public PersistentData getSubDataOrNull(String name) {
+		PersistentData data = this.subData.get(name);
+
+		if (data != null) {
+			return data;
+		} else if (this.tag.contains(name, TagDataTypes.COMPOUND)) {
+			String saveName = this.saveName + "$" + name;
+			return this.subData.put(name, new PersistentData(saveName, this.tag.getCompound(name)));
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * @return the {@link PersistentData} sub data instance, if it exists. Otherwise create and return a new {@link PersistentData} instance.
+	 */
+	public PersistentData getOrCreateSubData(String name) {
+		return this.subData.computeIfAbsent(name, n -> {
+			String saveName = this.saveName + "$" + name;
+
+			if (this.tag.contains(n, TagDataTypes.COMPOUND)) {
+				return this.subData.put(n, new PersistentData(saveName, this.tag.getCompound(n)));
+			} else {
+				CompoundTag tag = new CompoundTag();
+				this.tag.put(n, tag);
+				return this.subData.put(name, new PersistentData(saveName, tag));
+			}
+		});
 	}
 
 	/**

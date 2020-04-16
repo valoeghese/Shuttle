@@ -12,7 +12,7 @@ import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataLoadContext;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataSaveContext;
-import tk.valoeghese.shuttle.api.data.WorldTrackedData;
+import tk.valoeghese.shuttle.api.data.PersistentData;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
@@ -87,7 +87,7 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent {
 		return true;
 	}
 
-	private WorldTrackedData trackedData;
+	private PersistentData trackedData;
 
 	@Override
 	public void onWorldDataLoad(WorldDataLoadContext context) {

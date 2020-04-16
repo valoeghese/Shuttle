@@ -3,11 +3,12 @@ package tk.valoeghese.shuttle.impl.data;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.PersistentState;
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataLoadContext;
 import tk.valoeghese.shuttle.api.data.DataEvents.WorldDataSaveContext;
-import tk.valoeghese.shuttle.api.data.WorldTrackedData;
+import tk.valoeghese.shuttle.api.data.PersistentData;
 import tk.valoeghese.shuttle.api.event.Context;
 
 public class WorldDataContext implements WorldDataSaveContext, WorldDataLoadContext, Context<ShuttleWorldDataEvent> {
@@ -31,14 +32,14 @@ public class WorldDataContext implements WorldDataSaveContext, WorldDataLoadCont
 	}
 
 	@Override
-	public WorldTrackedData loadData(String name) {
+	public PersistentData loadData(String name) {
 		String saveName = this.currentEventId + "." + name;
 		PersistentState state = this.loadFunction.apply(saveName);
-		return new WorldTrackedData(saveName, state);
+		return new PersistentData(saveName, state == null ? new CompoundTag() : state.toTag(new CompoundTag()));
 	}
 
 	@Override
-	public void saveData(WorldTrackedData data) {
+	public void saveData(PersistentData data) {
 		PersistentState state = new DummyPersistentState(data.getSaveName());
 		state.fromTag(data.getTag());
 		this.setFunction.accept(state);
