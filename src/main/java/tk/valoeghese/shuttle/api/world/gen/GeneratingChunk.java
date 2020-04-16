@@ -1,6 +1,7 @@
 package tk.valoeghese.shuttle.api.world.gen;
 
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
 /**
  * Represents a chunk which is still generating.
@@ -21,6 +22,10 @@ public interface GeneratingChunk {
 	 * @param z the z coordinate inside the chunk. Should be from 0 to 15.
 	 */
 	void setBlock(int x, int y, int z, Block block);
+	/**
+	 * @return the dimension in which this chunk is.
+	 */
+	Dimension getDimension();
 	/**
 	 * @return the world seed.
 	 */

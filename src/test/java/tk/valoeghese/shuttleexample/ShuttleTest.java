@@ -23,10 +23,11 @@ import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
 
 public class ShuttleTest extends ShuttlePlugin
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
-ShuttlePlayerBlockPlaceEvent {
+ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {

@@ -1,19 +1,22 @@
 package tk.valoeghese.shuttle.impl.world;
 
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.chunk.Chunk;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
 
 public class GeneratingChunkImpl implements GeneratingChunk {
-	public GeneratingChunkImpl(ChunkRegion region, Chunk chunk) {
+	public GeneratingChunkImpl(IWorld region, Chunk chunk) {
 		this.chunk = chunk;
+		this.dimension = DimensionUtils.dimensionOf(region.getDimension().getType());
 		this.seed = region.getSeed();
 		this.seaLevel = region.getSeaLevel();
 	}
 
 	private final Chunk chunk;
+	private final Dimension dimension;
 	private final long seed;
 	private final int seaLevel;
 
@@ -40,4 +43,9 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 	}
 
 	private static final Mutable POS = new Mutable();
+
+	@Override
+	public Dimension getDimension() {
+		return this.dimension;
+	}
 }

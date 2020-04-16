@@ -57,5 +57,7 @@ public final class EventRegistry {
 		// world interaction
 		registerEventTracker(ShuttleEvents.PLAYER_BLOCK_BREAK);
 		registerEventTracker(ShuttleEvents.PLAYER_BLOCK_PLACE);
+		// world
+		registerEventTracker(ShuttleEvents.CHUNK_SHAPE);
 	}
 }

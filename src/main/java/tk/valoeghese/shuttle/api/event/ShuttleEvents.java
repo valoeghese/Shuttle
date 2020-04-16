@@ -10,12 +10,19 @@ import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTickEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
 import tk.valoeghese.shuttle.impl.data.WorldDataContext;
 
 /**
  * Class containing all the default shuttle events. Does not contain any plugin-added events or 
  */
 public final class ShuttleEvents {
+	public static final ShuttleEventTracker<ShuttleChunkShapeEvent, ChunkShapeContext> CHUNK_SHAPE = ShuttleEventTracker.of(
+			ShuttleChunkShapeEvent.class,
+			ChunkShapeContext.class,
+			(context, events) -> events.forEach(event -> event.onChunkShape(context)));
+
 	public static final ShuttleEventTracker<ShuttlePlayerBlockBreakEvent, PlayerBlockInteractionContext> PLAYER_BLOCK_BREAK = ShuttleEventTracker.of(
 			ShuttlePlayerBlockBreakEvent.class,
 			PlayerBlockInteractionContext.class,

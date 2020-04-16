@@ -51,7 +51,7 @@ public final class WorldGenEvents {
 		}
 
 		/**
-		 * @return the chunk that is generating. Use this to modify the shape of the world.
+		 * @return the chunk that is generating. Use this to modify the shape of the world, or get information about the world.
 		 */
 		public GeneratingChunk getChunk() {
 			return this.chunk;
