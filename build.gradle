@@ -59,7 +59,6 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
 			artifact(remapJar) {
 				builtBy remapJar
 			}
@@ -67,11 +66,18 @@ publishing {
 				builtBy remapSourcesJar
 			}
 		}
-	}
+    }
 
 	// select the repositories you want to publish to
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		if (project.hasProperty('maven_password')) {
+			maven {
+				url = "http://deploy.modmuss50.me/"
+				credentials {
+					username = "valoeghese"
+					password = project.getProperty('maven_password')
+				}
+			}
+        }
 	}
 }
