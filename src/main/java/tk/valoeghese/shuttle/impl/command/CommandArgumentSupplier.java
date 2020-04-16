@@ -1,7 +1,10 @@
 package tk.valoeghese.shuttle.impl.command;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
 import net.minecraft.command.arguments.BlockStateArgumentType;
@@ -38,5 +41,20 @@ public class CommandArgumentSupplier implements CommandArguments {
 	@Override
 	public Item getItem(String name) {
 		return ItemImpl.of(ItemStackArgumentType.getItemStackArgument(this.parent, name).getItem());
+	}
+
+	@Override
+	public String getString(String name) {
+		return StringArgumentType.getString(this.parent, name);
+	}
+
+	@Override
+	public float getFloat(String name) {
+		return FloatArgumentType.getFloat(this.parent, name);
+	}
+
+	@Override
+	public double getDouble(String name) {
+		return DoubleArgumentType.getDouble(this.parent, name);
 	}
 }

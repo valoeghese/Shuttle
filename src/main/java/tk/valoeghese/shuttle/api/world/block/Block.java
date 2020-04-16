@@ -1,5 +1,6 @@
 package tk.valoeghese.shuttle.api.world.block;
 
+import tk.valoeghese.shuttle.Unstable;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
 
 /**
@@ -9,6 +10,7 @@ public interface Block {
 	/**
 	 * @return the raw, vanilla block.
 	 */
+	@Unstable
 	net.minecraft.block.Block getRawBlock();
 	/**
 	 * @return the vanilla registry id of the block.

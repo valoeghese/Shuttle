@@ -1,9 +1,9 @@
 package tk.valoeghese.shuttle.api.command;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import tk.valoeghese.shuttle.api.chat.ChatMessageBuilder;
+import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.Vec3d;
 
 /**
  * Represents the executor of a command.

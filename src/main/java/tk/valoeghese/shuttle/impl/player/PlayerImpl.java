@@ -4,12 +4,13 @@ import java.util.UUID;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import tk.valoeghese.shuttle.api.command.PermissionLevel;
 import tk.valoeghese.shuttle.api.player.Inventory;
 import tk.valoeghese.shuttle.api.player.Player;
+import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.Vec3d;
+import tk.valoeghese.shuttle.impl.Wrappers;
 
 public class PlayerImpl implements Player {
 	public PlayerImpl(ServerPlayerEntity parent) {
@@ -42,12 +43,12 @@ public class PlayerImpl implements Player {
 
 	@Override
 	public Vec3d getCoordinates() {
-		return this.parent.getPos();
+		return Wrappers.wrap(this.parent.getPos());
 	}
 
 	@Override
 	public BlockPos getBlockCoordinates() {
-		return this.parent.getBlockPos();
+		return Wrappers.wrap(this.parent.getBlockPos());
 	}
 
 	@Override

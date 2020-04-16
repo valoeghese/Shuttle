@@ -1,5 +1,6 @@
 package tk.valoeghese.shuttle.api.item;
 
+import tk.valoeghese.shuttle.Unstable;
 import tk.valoeghese.shuttle.impl.item.ItemImpl;
 
 /**
@@ -9,6 +10,7 @@ public interface Item {
 	/**
 	 * @return the raw, vanilla item.
 	 */
+	@Unstable
 	net.minecraft.item.Item getRawItem();
 	/**
 	 * @return the vanilla registry id of the item.

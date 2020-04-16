@@ -1,9 +1,9 @@
 package tk.valoeghese.shuttle.api.player;
 
-import net.minecraft.util.math.BlockPos;
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
+import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.World;
 import tk.valoeghese.shuttle.api.world.block.Block;
@@ -53,7 +53,7 @@ public class PlayerEvents {
 			this.block = block;
 			this.pos = pos;
 			this.world = world;
-			this.chunkPos = new Vec2i(pos.getX() >> 4, pos.getZ() >> 4);
+			this.chunkPos = new Vec2i(pos.x >> 4, pos.z >> 4);
 		}
 
 		private final Player player;

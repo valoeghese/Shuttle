@@ -2,7 +2,10 @@ package tk.valoeghese.shuttle.impl.command;
 
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.command.arguments.BlockStateArgumentType;
 import net.minecraft.command.arguments.ItemStackArgumentType;
@@ -35,6 +38,16 @@ public class CommandParameter {
 			return BlockStateArgumentType.blockState();
 		case ITEM:
 			return ItemStackArgumentType.itemStack();
+		case WORD:
+			return StringArgumentType.word();
+		case STRING:
+			return StringArgumentType.string();
+		case GREEDY_STRING:
+			return StringArgumentType.greedyString();
+		case FLOAT:
+			return FloatArgumentType.floatArg();
+		case DOUBLE:
+			return DoubleArgumentType.doubleArg();
 		default:
 			return null;
 		}

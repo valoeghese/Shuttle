@@ -14,6 +14,7 @@ import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
 import tk.valoeghese.shuttle.impl.Targets;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
 import tk.valoeghese.shuttle.impl.world.WorldImpl;
@@ -27,7 +28,7 @@ public class MixinServerPlayerInteractionManager {
 				new PlayerImpl(invokedOn),
 				new WorldImpl((ServerWorld) world),
 				BlockImpl.of(world.getBlockState(pos).getBlock()),
-				pos);
+				Wrappers.wrap(pos));
 
 		// post event
 		ShuttleEvents.PLAYER_BLOCK_BREAK.postEvent(context);

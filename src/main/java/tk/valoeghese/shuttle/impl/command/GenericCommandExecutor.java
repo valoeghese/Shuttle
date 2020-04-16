@@ -3,11 +3,12 @@ package tk.valoeghese.shuttle.impl.command;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.command.PermissionLevel;
+import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.Vec3d;
+import tk.valoeghese.shuttle.impl.Wrappers;
 
 public class GenericCommandExecutor implements CommandExecutor {
 	GenericCommandExecutor(ServerCommandSource source) {
@@ -35,12 +36,12 @@ public class GenericCommandExecutor implements CommandExecutor {
 
 	@Override
 	public BlockPos getBlockCoordinates() {
-		return this.entity == null ? BlockPos.ORIGIN : this.entity.getBlockPos();
+		return this.entity == null ? BlockPos.ORIGIN : Wrappers.wrap(this.entity.getBlockPos());
 	}
 
 	@Override
 	public Vec3d getCoordinates() {
-		return this.entity == null ? Vec3d.ZERO : this.entity.getPos();
+		return this.entity == null ? Vec3d.ORIGIN : Wrappers.wrap(this.entity.getPos());
 	}
 
 	@Override

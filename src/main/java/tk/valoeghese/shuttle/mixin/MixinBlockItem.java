@@ -15,6 +15,7 @@ import net.minecraft.server.world.ServerWorld;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.BlockImpl;
 import tk.valoeghese.shuttle.impl.world.WorldImpl;
@@ -32,7 +33,7 @@ public class MixinBlockItem {
 					new PlayerImpl((ServerPlayerEntity) entity),
 					new WorldImpl((ServerWorld) placementContext.getWorld()),
 					BlockImpl.of(state == null ? null : state.getBlock()),
-					placementContext.getBlockPos());
+					Wrappers.wrap(placementContext.getBlockPos()));
 
 			// post event
 			ShuttleEvents.PLAYER_BLOCK_PLACE.postEvent(context);

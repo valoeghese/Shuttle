@@ -1,7 +1,8 @@
 package tk.valoeghese.shuttle.api.world;
 
-import net.minecraft.util.math.BlockPos;
+import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
 /**
  * Represents a part of the world that contains the chunks, blocks, etc for a specific dimension.<br/>
@@ -30,4 +31,8 @@ public interface World {
 	 * @return whether the block was successfully set.
 	 */
 	boolean setBlock(BlockPos pos, Block block);
+	/**
+	 * @return the dimension of this world.
+	 */
+	Dimension getDimension();
 }

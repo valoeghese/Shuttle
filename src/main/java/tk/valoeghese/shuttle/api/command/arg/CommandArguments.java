@@ -23,4 +23,17 @@ public interface CommandArguments {
 	 * Gets the item command argument for the given name, if it exists.
 	 */
 	Item getItem(String name);
+	/**
+	 * Gets the string command argument for the given name, if it exists.
+	 * @return a string argument type: i.e. {@link CommandArgType#WORD}, {@link CommandArgType#STRING}, or {@link CommandArgType#GREEDY_STRING}.
+	 */
+	String getString(String name);
+	/**
+	 * Gets the float command argument for the given name, if it exists.
+	 */
+	float getFloat(String name);
+	/**
+	 * Gets the double command argument for the given name, if it exists.
+	 */
+	double getDouble(String name);
 }
