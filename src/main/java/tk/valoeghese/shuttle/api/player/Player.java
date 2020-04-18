@@ -5,6 +5,7 @@ import java.util.UUID;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
+import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
 /**
  * Interface representing a player on the server, which provides utilities to interact with the said player.
@@ -34,4 +35,8 @@ public interface Player extends CommandExecutor {
 	 * Teleports the player to the specified block position.
 	 */
 	void teleportTo(BlockPos position);
+	/**
+	 * @return the dimension the player is in.
+	 */
+	Dimension getDimension();
 }

@@ -10,7 +10,9 @@ import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
+import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 import tk.valoeghese.shuttle.impl.Wrappers;
+import tk.valoeghese.shuttle.impl.world.DimensionUtils;
 
 public class PlayerImpl implements Player {
 	public PlayerImpl(ServerPlayerEntity parent) {
@@ -79,6 +81,11 @@ public class PlayerImpl implements Player {
 	@Override
 	public void teleportTo(BlockPos position) {
 		this.parent.setPos(position.x + 0.5, position.y + 0.5, position.z + 0.5);
+	}
+
+	@Override
+	public Dimension getDimension() {
+		return DimensionUtils.dimensionOf(this.parent.dimension);
 	}
 
 	@Override
