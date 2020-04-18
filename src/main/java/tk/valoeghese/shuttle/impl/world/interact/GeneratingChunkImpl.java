@@ -3,7 +3,7 @@ package tk.valoeghese.shuttle.impl.world.interact;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.chunk.Chunk;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
@@ -16,14 +16,14 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 		this.dimension = DimensionUtils.dimensionOf(region.getDimension().getType());
 		this.seed = region.getSeed();
 		this.seaLevel = region.getSeaLevel();
-		this.chunkPos = new Vec2i(chunk.getPos().x, chunk.getPos().z);
+		this.chunkPos = new ChunkPos(chunk.getPos().x, chunk.getPos().z);
 	}
 
 	private final Chunk chunk;
 	private final Dimension dimension;
 	private final long seed;
 	private final int seaLevel;
-	private final Vec2i chunkPos;
+	private final ChunkPos chunkPos;
 	private boolean modified = false;
 
 	@Override
@@ -61,11 +61,11 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 
 	@Override
 	public int getChunkZ() {
-		return this.chunkPos.y;
+		return this.chunkPos.z;
 	}
 
 	@Override
-	public Vec2i getChunkPos() {
+	public ChunkPos getChunkPos() {
 		return this.chunkPos;
 	}
 

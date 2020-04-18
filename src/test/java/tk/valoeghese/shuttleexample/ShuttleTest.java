@@ -23,7 +23,7 @@ import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimensions;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
@@ -72,7 +72,7 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 
 		Command get = trackedDataTest.subCommand("get");
 		get.setCallback((args, cxt) -> {
-			cxt.getExecutor().sendMessage(this.trackedData.getVec2i(cxt.getExecutor().getName(), Vec2i.ORIGIN).toString());
+			cxt.getExecutor().sendMessage(this.trackedData.getVec2i(cxt.getExecutor().getName(), ChunkPos.ORIGIN).toString());
 			return true;
 		});
 
@@ -103,7 +103,7 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 
 	@Override
 	public EventResult onPlayerBlockBreak(PlayerBlockInteractionContext context) {
-		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
+		if (context.getChunkPos().equals(ChunkPos.ORIGIN)) {
 			context.getWorld().setBlock(context.getBlockPos(), GOLD_BLOCK);
 			return EventResult.FAIL;
 		}
@@ -113,7 +113,7 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 
 	@Override
 	public EventResult onPlayerBlockPlace(PlayerBlockPlacementContext context) {
-		if (context.getChunkPos().equals(Vec2i.ORIGIN)) {
+		if (context.getChunkPos().equals(ChunkPos.ORIGIN)) {
 			return EventResult.FAIL;
 		}
 

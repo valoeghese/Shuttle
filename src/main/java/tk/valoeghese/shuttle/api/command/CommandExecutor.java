@@ -2,7 +2,7 @@ package tk.valoeghese.shuttle.api.command;
 
 import tk.valoeghese.shuttle.api.chat.ChatMessageBuilder;
 import tk.valoeghese.shuttle.api.util.BlockPos;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
 
 /**
@@ -26,7 +26,7 @@ public interface CommandExecutor {
 	/**
 	 * @return if an entity/player, the chunk coordinates of the entity/player. Otherwise returns 0, 0.
 	 */
-	Vec2i getChunkCoordinates();
+	ChunkPos getChunkCoordinates();
 	/**
 	 * @return if an entity/player, the block coordinates of the entity/player. Otherwise returns 0, 0, 0.
 	 */

@@ -1,5 +1,10 @@
 package tk.valoeghese.shuttle.impl.world.interact;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import tk.valoeghese.shuttle.api.util.BlockPos;
@@ -36,5 +41,30 @@ public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 		return this.setBlock(pos.x, pos.y, pos.z, block);
 	}
 
+	@Override
+	public boolean setLootChest(BlockPos pos, String lootTableId) {
+		return this.setLootChest(pos.x, pos.y, pos.z, lootTableId);
+	}
+
+	@Override
+	public boolean setLootChest(int x, int y, int z, String lootTableId) {
+		POS.set(x, y, z);
+
+		if (!this.parent.setBlockState(POS, Blocks.CHEST.getDefaultState(), 3)) {
+			return false;
+		}
+
+		BlockEntity entity = this.parent.getBlockEntity(POS);
+
+		if (entity instanceof ChestBlockEntity) {
+			((ChestBlockEntity)entity).setLootTable(new Identifier(lootTableId), this.parent.getRandom().nextLong());
+			return true;
+		} else {
+			this.parent.setBlockState(POS, AIR, 3);
+			return false;
+		}
+	}
+
+	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final Mutable POS = new Mutable();
 }

@@ -8,7 +8,7 @@ import tk.valoeghese.shuttle.api.command.PermissionLevel;
 import tk.valoeghese.shuttle.api.player.Inventory;
 import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.api.util.BlockPos;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
 import tk.valoeghese.shuttle.impl.Wrappers;
 
@@ -37,8 +37,8 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
-	public Vec2i getChunkCoordinates() {
-		return new Vec2i(this.parent.chunkX, this.parent.chunkZ);
+	public ChunkPos getChunkCoordinates() {
+		return new ChunkPos(this.parent.chunkX, this.parent.chunkZ);
 	}
 
 	@Override

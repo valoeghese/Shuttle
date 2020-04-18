@@ -6,7 +6,7 @@ import java.util.Map;
 import net.minecraft.nbt.CompoundTag;
 import tk.valoeghese.shuttle.Unstable;
 import tk.valoeghese.shuttle.api.data.DataEvents.ShuttleWorldDataEvent;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.impl.TagDataTypes;
 
 /**
@@ -33,8 +33,8 @@ public class PersistentData {
 		return value;
 	}
 
-	public Vec2i putVec2i(String name, Vec2i vector) {
-		this.tag.putLong(name, toLong(vector.x, vector.y));
+	public ChunkPos putVec2i(String name, ChunkPos vector) {
+		this.tag.putLong(name, toLong(vector.x, vector.z));
 		return vector;
 	}
 
@@ -59,7 +59,7 @@ public class PersistentData {
 		return this.tag.contains(name, TagDataTypes.INT) ? this.tag.getInt(name) : this.putInt(name, defaultValue);
 	}
 
-	public Vec2i getVec2i(String name, Vec2i defaultValue) {
+	public ChunkPos getVec2i(String name, ChunkPos defaultValue) {
 		return this.tag.contains(name, TagDataTypes.LONG) ? toVec2i(this.tag.getLong(name)) : this.putVec2i(name, defaultValue);
 	}
 
@@ -126,10 +126,10 @@ public class PersistentData {
 		return ((long) x & 0xFFFFFFFFL) | (((long) y & 0xFFFFFFFFL) << 32);
 	}
 
-	private static Vec2i toVec2i(long hash) {
+	private static ChunkPos toVec2i(long hash) {
 		int x = (int) (hash & 0xFFFFFFFFL);
 		hash >>= 32;
 		int y = (int) (hash & 0xFFFFFFFFL);
-		return new Vec2i(x, y);
+		return new ChunkPos(x, y);
 	}
 }

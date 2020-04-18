@@ -1,6 +1,6 @@
 package tk.valoeghese.shuttle.api.world.gen;
 
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
@@ -46,5 +46,5 @@ public interface GeneratingChunk {
 	/**
 	 * @return the position of the chunk in the 'chunk grid' of the world.
 	 */
-	Vec2i getChunkPos();
+	ChunkPos getChunkPos();
 }

@@ -6,7 +6,7 @@ import net.minecraft.text.LiteralText;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.command.PermissionLevel;
 import tk.valoeghese.shuttle.api.util.BlockPos;
-import tk.valoeghese.shuttle.api.util.Vec2i;
+import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
 import tk.valoeghese.shuttle.impl.Wrappers;
 
@@ -30,8 +30,8 @@ public class GenericCommandExecutor implements CommandExecutor {
 	}
 
 	@Override
-	public Vec2i getChunkCoordinates() {
-		return this.entity == null ? Vec2i.ORIGIN : new Vec2i(this.entity.chunkX, this.entity.chunkZ);
+	public ChunkPos getChunkCoordinates() {
+		return this.entity == null ? ChunkPos.ORIGIN : new ChunkPos(this.entity.chunkX, this.entity.chunkZ);
 	}
 
 	@Override
