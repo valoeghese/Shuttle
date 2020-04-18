@@ -49,6 +49,7 @@ public final class EventRegistry {
 	static {
 		// setup
 		registerEventTracker(ShuttleEvents.SETUP_COMMAND);
+		registerEventTracker(ShuttleEvents.PER_BIOME_SETUP);
 		// tick loop
 		registerEventTracker(ShuttleEvents.TICK);
 		registerEventTracker(ShuttleEvents.TIMER);

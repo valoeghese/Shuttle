@@ -35,11 +35,11 @@ public final class SetupEvents {
 	/**
 	 * Event Listener for setting up stuff per biome, such as adding {@link Generator generators}.
 	 */
-	public static interface ShuttleBiomeSetup extends ShuttleEventListener {
+	public static interface ShuttlePerBiomeSetupEvent extends ShuttleEventListener {
 		/**
 		 * Called during biome initialisation.
 		 */
-		void onBiomeRegister(BiomeSetupContext context);
+		void setupBiome(BiomeSetupContext context);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public final class SetupEvents {
 	/**
 	 * Context for biome setup. Contains useful methods for adding {@link Generator generators} to the biome.
 	 */
-	public abstract static class BiomeSetupContext implements Context<ShuttleBiomeSetup> {
+	public abstract static class BiomeSetupContext implements Context<ShuttlePerBiomeSetupEvent> {
 		public BiomeSetupContext(Biome biome) {
 			this.biome = biome;
 		}

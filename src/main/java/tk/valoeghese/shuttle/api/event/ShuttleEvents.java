@@ -5,8 +5,10 @@ import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionConte
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
+import tk.valoeghese.shuttle.api.server.SetupEvents.BiomeSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
+import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttlePerBiomeSetupEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTickEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
@@ -108,4 +110,9 @@ public final class ShuttleEvents {
 					events.forEach(event -> event.onWorldDataSave(context));
 				}
 			});
+
+	public static final ShuttleEventTracker<ShuttlePerBiomeSetupEvent, BiomeSetupContext> PER_BIOME_SETUP = ShuttleEventTracker.of(
+			ShuttlePerBiomeSetupEvent.class,
+			BiomeSetupContext.class,
+			(context, events) -> events.forEach(event -> event.setupBiome(context)));
 }
