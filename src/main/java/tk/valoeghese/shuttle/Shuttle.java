@@ -27,16 +27,6 @@ public class Shuttle implements ModInitializer {
 			ShuttleEvents.TIMER.postEvent(context);
 		});
 
-		Registry.BIOME.forEach(biome -> {
-			BiomeSetupContextImpl context = new BiomeSetupContextImpl(biome);
-			ShuttleEvents.PER_BIOME_SETUP.postEvent(context);
-		});
-
-		RegistryEntryAddedCallback.event(Registry.BIOME).register((id, registryName, biome) -> {
-			BiomeSetupContextImpl context = new BiomeSetupContextImpl(biome);
-			ShuttleEvents.PER_BIOME_SETUP.postEvent(context);
-		});
-
 		Registry.DIMENSION_TYPE.forEach(dimension -> {
 			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
 				DimensionUtils.addModdedDimension(
@@ -44,7 +34,7 @@ public class Shuttle implements ModInitializer {
 						dimension);
 			}
 		});
-		
+
 		RegistryEntryAddedCallback.event(Registry.DIMENSION_TYPE).register((id, registryName, dimension) -> {
 			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
 				DimensionUtils.addModdedDimension(
@@ -57,7 +47,17 @@ public class Shuttle implements ModInitializer {
 	public static void setupPlugins() {
 		LOGGER.info("Shuttle is setting up plugins!");
 
-		CommandSetupContext context = new CommandSetupContext();
-		ShuttleEvents.SETUP_COMMAND.postEvent(context);
+		CommandSetupContext commandContext = new CommandSetupContext();
+		ShuttleEvents.SETUP_COMMAND.postEvent(commandContext);
+
+		Registry.BIOME.forEach(biome -> {
+			BiomeSetupContextImpl context = new BiomeSetupContextImpl(biome);
+			ShuttleEvents.PER_BIOME_SETUP.postEvent(context);
+		});
+
+		RegistryEntryAddedCallback.event(Registry.BIOME).register((id, registryName, biome) -> {
+			BiomeSetupContextImpl context = new BiomeSetupContextImpl(biome);
+			ShuttleEvents.PER_BIOME_SETUP.postEvent(context);
+		});
 	}
 }
