@@ -2,6 +2,8 @@ package tk.valoeghese.shuttle.impl.world.decorator;
 
 import java.util.Random;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
@@ -31,7 +33,8 @@ public class CountHeightRangeSolidBottomFeature extends Feature<DefaultFeatureCo
 		BlockPos.Mutable mutPos = new BlockPos.Mutable(pos);
 
 		while (mutPos.getY() > this.minY && attempts > 0) {
-			if (world.getBlockState(mutPos).isAir() && !world.getBlockState(mutPos.down()).isAir()) {
+			BlockState down = world.getBlockState(mutPos.down());
+			if (!down.isAir() && !(down.getBlock() instanceof FluidBlock) && world.getBlockState(mutPos).isAir()) {
 				ChunkRegion region = (ChunkRegion) world;
 				return this.generator.generate(new GenWorld(region), random, region.getCenterChunkX() << 4, region.getCenterChunkZ() << 4, Wrappers.wrap(mutPos));
 			}
