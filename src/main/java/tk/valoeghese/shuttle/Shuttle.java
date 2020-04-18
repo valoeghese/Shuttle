@@ -48,7 +48,7 @@ public class Shuttle implements ModInitializer {
 		RegistryEntryAddedCallback.event(Registry.DIMENSION_TYPE).register((id, registryName, dimension) -> {
 			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
 				DimensionUtils.addModdedDimension(
-						registryName,
+						registryName.toString(),
 						dimension);
 			}
 		});
