@@ -12,6 +12,7 @@ import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.impl.world.BiomeSetupContextImpl;
+import tk.valoeghese.shuttle.impl.world.DimensionUtils;
 
 public class Shuttle implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("Shuttle");
@@ -38,7 +39,17 @@ public class Shuttle implements ModInitializer {
 
 		Registry.DIMENSION_TYPE.forEach(dimension -> {
 			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
-				
+				DimensionUtils.addModdedDimension(
+						Registry.DIMENSION_TYPE.getId(dimension).toString(),
+						dimension);
+			}
+		});
+		
+		RegistryEntryAddedCallback.event(Registry.DIMENSION_TYPE).register((id, registryName, dimension) -> {
+			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
+				DimensionUtils.addModdedDimension(
+						registryName,
+						dimension);
 			}
 		});
 	}

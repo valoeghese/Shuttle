@@ -12,6 +12,10 @@ public class DimensionUtils {
 		return DIMENSIONS.get(vanillaType);
 	}
 
+	public static void addModdedDimension(String registryName, DimensionType parent) {
+		DIMENSIONS.put(parent, new ModdedDimension(registryName, parent));
+	}
+
 	private static final Map<DimensionType, Dimension> DIMENSIONS = new HashMap<>();
 
 	static {
