@@ -7,16 +7,23 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import tk.valoeghese.shuttle.api.world.biome.BiomeType;
+import tk.valoeghese.shuttle.impl.Wrappers;
 
 public class BiomeImpl implements tk.valoeghese.shuttle.api.world.biome.Biome {
 	private BiomeImpl(Biome parent, String registryName) {
 		this.parent = parent;
 		this.registryName = registryName;
+		this.type = Wrappers.wrap(parent.getCategory());
 	}
 
 	private final Biome parent;
 	private final String registryName;
 	private final BiomeType type;
+
+	@Override
+	public Biome getRawBiome() {
+		return this.parent;
+	}
 
 	@Override
 	public String getRegistryName() {

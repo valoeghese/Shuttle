@@ -13,6 +13,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
+import tk.valoeghese.shuttle.api.world.biome.BiomeType;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.block.BlockProperty;
 import tk.valoeghese.shuttle.impl.world.block.BlockStateImpl;
@@ -59,6 +60,86 @@ public final class Wrappers {
 		}
 
 		return state;
+	}
+
+	public static BiomeType wrap(net.minecraft.world.biome.Biome.Category category) {
+		switch (category) {
+		case BEACH:
+			return BiomeType.BEACH;
+		case DESERT:
+			return BiomeType.DESERT;
+		case EXTREME_HILLS:
+			return BiomeType.EXTREME_HILLS;
+		case FOREST:
+			return BiomeType.FOREST;
+		case ICY:
+			return BiomeType.ICY;
+		case JUNGLE:
+			return BiomeType.JUNGLE;
+		case MESA:
+			return BiomeType.MESA;
+		case MUSHROOM:
+			return BiomeType.MUSHROOM;
+		case NETHER:
+			return BiomeType.NETHER;
+		case OCEAN:
+			return BiomeType.OCEAN;
+		case PLAINS:
+			return BiomeType.PLAINS;
+		case RIVER:
+			return BiomeType.RIVER;
+		case SAVANNA:
+			return BiomeType.SAVANNA;
+		case SWAMP:
+			return BiomeType.SWAMP;
+		case TAIGA:
+			return BiomeType.TAIGA;
+		case THEEND:
+			return BiomeType.THEEND;
+		case NONE:
+		default:
+			return BiomeType.NONE;
+		}
+	}
+
+	public static net.minecraft.world.biome.Biome.Category unwrap(BiomeType type) {
+		switch(type) {
+		case BEACH:
+			return net.minecraft.world.biome.Biome.Category.BEACH;
+		case DESERT:
+			return net.minecraft.world.biome.Biome.Category.DESERT;
+		case EXTREME_HILLS:
+			return net.minecraft.world.biome.Biome.Category.EXTREME_HILLS;
+		case FOREST:
+			return net.minecraft.world.biome.Biome.Category.FOREST;
+		case ICY:
+			return net.minecraft.world.biome.Biome.Category.ICY;
+		case JUNGLE:
+			return net.minecraft.world.biome.Biome.Category.JUNGLE;
+		case MESA:
+			return net.minecraft.world.biome.Biome.Category.MESA;
+		case MUSHROOM:
+			return net.minecraft.world.biome.Biome.Category.MUSHROOM;
+		case NETHER:
+			return net.minecraft.world.biome.Biome.Category.NETHER;
+		case OCEAN:
+			return net.minecraft.world.biome.Biome.Category.OCEAN;
+		case PLAINS:
+			return net.minecraft.world.biome.Biome.Category.PLAINS;
+		case RIVER:
+			return net.minecraft.world.biome.Biome.Category.RIVER;
+		case SAVANNA:
+			return net.minecraft.world.biome.Biome.Category.SAVANNA;
+		case SWAMP:
+			return net.minecraft.world.biome.Biome.Category.SWAMP;
+		case TAIGA:
+			return net.minecraft.world.biome.Biome.Category.TAIGA;
+		case THEEND:
+			return net.minecraft.world.biome.Biome.Category.THEEND;
+		case NONE:
+		default:
+			return net.minecraft.world.biome.Biome.Category.NONE;
+		}
 	}
 
 	private static final Function<Block, Int2ObjectMap<BlockState>> I2OF = b -> new Int2ObjectArrayMap<>();
