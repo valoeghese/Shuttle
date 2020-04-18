@@ -32,8 +32,7 @@ public class BiomeImpl implements tk.valoeghese.shuttle.api.world.biome.Biome {
 
 	@Override
 	public BiomeType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.type;
 	}
 
 	public static BiomeImpl of(Biome biome) {

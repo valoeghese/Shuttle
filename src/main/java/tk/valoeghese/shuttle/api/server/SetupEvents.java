@@ -9,6 +9,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.Command;
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
+import tk.valoeghese.shuttle.api.world.biome.Biome;
+import tk.valoeghese.shuttle.api.world.gen.Generator;
+import tk.valoeghese.shuttle.api.world.gen.GeneratorPlacement;
 import tk.valoeghese.shuttle.impl.command.BrigadierCommandBuilder;
 
 /**
@@ -27,6 +30,16 @@ public final class SetupEvents {
 		 * Called at command setup, on the launch of the game.
 		 */
 		void setupCommands(CommandSetupContext context);
+	}
+
+	/**
+	 * Event Listener for setting up stuff per biome, such as adding {@link Generator generators}.
+	 */
+	public static interface ShuttleBiomeSetup extends ShuttleEventListener {
+		/**
+		 * Called during biome initialisation.
+		 */
+		void onBiomeRegister(BiomeSetupContext context);
 	}
 
 	/**
@@ -55,5 +68,33 @@ public final class SetupEvents {
 		public void registerBrigadierCommand(boolean onlyOnDedicated, Consumer<CommandDispatcher<ServerCommandSource>> commandSetup) {
 			CommandRegistry.INSTANCE.register(false, commandSetup);
 		}
+	}
+
+	/**
+	 * Context for biome setup. Contains useful methods for adding {@link Generator generators} to the biome.
+	 */
+	public abstract static class BiomeSetupContext implements Context<ShuttleBiomeSetup> {
+		public BiomeSetupContext(Biome biome) {
+			this.biome = biome;
+		}
+
+		private final Biome biome;
+
+		public Biome getBiome() {
+			return this.biome;
+		}
+
+		/**
+		 * @param generator the generator to generate at the stage minecraft adds surface structures.
+		 */
+		public abstract void addSurfaceStructure(Generator generator, GeneratorPlacement placement);
+		/**
+		 * @param generator the generator to generate at the stage minecraft adds underground structures.
+		 */
+		public abstract void addUndergroundStructure(Generator generator, GeneratorPlacement placemen);
+		/**
+		 * @param generator the generator to generate at the stage minecraft adds vegetal decoration such as grass and trees.
+		 */
+		public abstract void addVegetalDecoration(Generator generator, GeneratorPlacement placemen);
 	}
 }
