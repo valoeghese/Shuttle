@@ -16,8 +16,8 @@ import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionConte
 import tk.valoeghese.shuttle.impl.Targets;
 import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
-import tk.valoeghese.shuttle.impl.world.BlockImpl;
-import tk.valoeghese.shuttle.impl.world.WorldImpl;
+import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
+import tk.valoeghese.shuttle.impl.world.interact.WorldImpl;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public class MixinServerPlayerInteractionManager {

@@ -1,10 +1,11 @@
-package tk.valoeghese.shuttle.impl.world;
+package tk.valoeghese.shuttle.impl.world.interact;
 
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.world.World;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 
 public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 	public AbstractWorldImpl(T parent) {

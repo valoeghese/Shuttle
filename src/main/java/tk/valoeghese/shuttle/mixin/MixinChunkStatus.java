@@ -12,8 +12,8 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
 import tk.valoeghese.shuttle.impl.Targets;
-import tk.valoeghese.shuttle.impl.world.BlockImpl;
-import tk.valoeghese.shuttle.impl.world.GeneratingChunkImpl;
+import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
+import tk.valoeghese.shuttle.impl.world.interact.GeneratingChunkImpl;
 
 @Mixin(ChunkStatus.class)
 public class MixinChunkStatus {

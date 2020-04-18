@@ -14,7 +14,7 @@ import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.api.item.Item;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.impl.item.ItemImpl;
-import tk.valoeghese.shuttle.impl.world.BlockImpl;
+import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 
 public class CommandArgumentSupplier implements CommandArguments {
 	public CommandArgumentSupplier(CommandContext<ServerCommandSource> src) {

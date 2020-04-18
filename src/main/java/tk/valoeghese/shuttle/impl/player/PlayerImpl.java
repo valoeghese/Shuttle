@@ -70,4 +70,13 @@ public class PlayerImpl implements Player {
 	public Inventory getInventory() {
 		return this.inventory;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Player) {
+			return this.getUUID().equals(((Player) obj).getUUID());
+		} else {
+			return false;
+		}
+	}
 }

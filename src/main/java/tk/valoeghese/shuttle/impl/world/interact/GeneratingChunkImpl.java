@@ -1,4 +1,4 @@
-package tk.valoeghese.shuttle.impl.world;
+package tk.valoeghese.shuttle.impl.world.interact;
 
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
@@ -7,6 +7,8 @@ import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
+import tk.valoeghese.shuttle.impl.world.DimensionUtils;
+import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 
 public class GeneratingChunkImpl implements GeneratingChunk {
 	public GeneratingChunkImpl(IWorld region, Chunk chunk) {
