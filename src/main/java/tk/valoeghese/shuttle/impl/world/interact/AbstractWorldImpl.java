@@ -1,6 +1,5 @@
 package tk.valoeghese.shuttle.impl.world.interact;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -60,11 +59,10 @@ public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 			((ChestBlockEntity)entity).setLootTable(new Identifier(lootTableId), this.parent.getRandom().nextLong());
 			return true;
 		} else {
-			this.parent.setBlockState(POS, AIR, 3);
+			// Should never happen.
 			return false;
 		}
 	}
 
-	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final Mutable POS = new Mutable();
 }
