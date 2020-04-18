@@ -72,6 +72,16 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
+	public void teleportTo(Vec3d position) {
+		this.parent.setPos(position.x, position.y, position.z);
+	}
+
+	@Override
+	public void teleportTo(BlockPos position) {
+		this.parent.setPos(position.x + 0.5, position.y + 0.5, position.z + 0.5);
+	}
+
+	@Override
 	public int hashCode() {
 		return 3 * this.getUUID().hashCode();
 	}
