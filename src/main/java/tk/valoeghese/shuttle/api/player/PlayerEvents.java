@@ -1,5 +1,6 @@
 package tk.valoeghese.shuttle.api.player;
 
+import tk.valoeghese.shuttle.Unstable;
 import tk.valoeghese.shuttle.api.event.Context;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEventListener;
@@ -111,6 +112,7 @@ public class PlayerEvents {
 		/**
 		 * @return the event result. Used by the implementation.
 		 */
+		@Unstable
 		public EventResult getResult() {
 			return this.success ? EventResult.SUCCESS : (this.fail ? EventResult.FAIL : EventResult.PASS);
 		}

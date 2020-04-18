@@ -38,7 +38,7 @@ public final class EventRegistry {
 	public static void registerEventTracker(ShuttleEventTracker tracker) {
 		events.add(tracker);
 
-		// register listeners in retrograde
+		// register listeners in retrospect
 		listeners.forEach(listener -> {
 			if (tracker.getEventClass().isAssignableFrom(listener.getClass())) {
 				tracker.subscribe(listener);
@@ -59,5 +59,6 @@ public final class EventRegistry {
 		registerEventTracker(ShuttleEvents.PLAYER_BLOCK_PLACE);
 		// world
 		registerEventTracker(ShuttleEvents.CHUNK_SHAPE);
+		registerEventTracker(ShuttleEvents.REPLACE_BLOCKS);
 	}
 }

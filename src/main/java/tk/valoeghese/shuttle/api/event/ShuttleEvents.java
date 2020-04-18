@@ -11,7 +11,9 @@ import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTickEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleReplaceBlocksEvent;
 import tk.valoeghese.shuttle.impl.data.WorldDataContext;
 
 /**
@@ -46,6 +48,23 @@ public final class ShuttleEvents {
 			(context, events) -> {
 				for (ShuttlePlayerBlockPlaceEvent event : events) {
 					EventResult result = event.onPlayerBlockPlace(context);
+
+					if (result == EventResult.FAIL) {
+						context.notifyEvent(0);
+						break;
+					} else if (result == EventResult.SUCCESS) {
+						context.notifyEvent(1);
+						break;
+					}
+				}
+			});
+
+	public static final ShuttleEventTracker<ShuttleReplaceBlocksEvent, ReplaceBlocksContext> REPLACE_BLOCKS = ShuttleEventTracker.of(
+			ShuttleReplaceBlocksEvent.class,
+			ReplaceBlocksContext.class,
+			(context, events) -> {
+				for (ShuttleReplaceBlocksEvent event : events) {
+					EventResult result = event.onReplaceBlocks(context);
 
 					if (result == EventResult.FAIL) {
 						context.notifyEvent(0);

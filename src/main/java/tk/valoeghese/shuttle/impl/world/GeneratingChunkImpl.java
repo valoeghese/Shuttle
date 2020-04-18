@@ -22,6 +22,7 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 	private final long seed;
 	private final int seaLevel;
 	private final Vec2i chunkPos;
+	private boolean modified = false;
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
@@ -31,6 +32,7 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 
 	@Override
 	public void setBlock(int x, int y, int z, Block block) {
+		this.modified = true;
 		POS.set(x, y, z);
 		this.chunk.setBlockState(POS, block.getRawBlock().getDefaultState(), false);
 	}
@@ -63,6 +65,10 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 	@Override
 	public Vec2i getChunkPos() {
 		return this.chunkPos;
+	}
+
+	public boolean isModified() {
+		return this.modified;
 	}
 
 	private static final Mutable POS = new Mutable();
