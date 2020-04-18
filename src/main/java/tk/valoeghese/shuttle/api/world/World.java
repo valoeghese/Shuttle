@@ -33,13 +33,13 @@ public interface World {
 	boolean setBlock(BlockPos pos, Block block);
 	/**
 	 * Sets a chest with the given loot table at the specified position. Custom loot tables can be added in your mod datapack (which goes in src/main/resources).
-	 * @param lootTableId the string id (registry name) of the loot table to use.
+	 * @param lootTableId the string id (registry name) of the loot table to use. For example, the end city loot is "minecraft:chests/end_city_treasure".
 	 * @return whether the block was successfully set and the loot table was successfully applied.
 	 */
 	boolean setLootChest(BlockPos pos, String lootTableId);
 	/**
 	 * Sets a chest with the given loot table at the specified position. Custom loot tables can be added in your mod datapack (which goes in src/main/resources).
-	 * @param lootTableId the string id (registry name) of the loot table to use.
+	 * @param lootTableId the string id (registry name) of the loot table to use. For example, the end city loot is "minecraft:chests/end_city_treasure".
 	 * @return whether the block was successfully set and the loot table was successfully applied.
 	 */
 	boolean setLootChest(int x, int y, int z, String lootTableId);
