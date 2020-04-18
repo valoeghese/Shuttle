@@ -72,6 +72,11 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
+	public int hashCode() {
+		return 3 * this.getUUID().hashCode();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Player) {
 			return this.getUUID().equals(((Player) obj).getUUID());
