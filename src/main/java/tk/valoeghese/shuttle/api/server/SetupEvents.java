@@ -91,10 +91,14 @@ public final class SetupEvents {
 		/**
 		 * @param generator the generator to generate at the stage minecraft adds underground structures.
 		 */
-		public abstract void addUndergroundStructure(Generator generator, GeneratorPlacement placemen);
+		public abstract void addUndergroundStructure(Generator generator, GeneratorPlacement placement);
+		/**
+		 * @param generator the generator to generate at the stage minecraft decorates the underground.
+		 */
+		public abstract void addUndergroundDecoration(Generator generator, GeneratorPlacement placement);
 		/**
 		 * @param generator the generator to generate at the stage minecraft adds vegetal decoration such as grass and trees.
 		 */
-		public abstract void addVegetalDecoration(Generator generator, GeneratorPlacement placemen);
+		public abstract void addVegetalDecoration(Generator generator, GeneratorPlacement placement);
 	}
 }

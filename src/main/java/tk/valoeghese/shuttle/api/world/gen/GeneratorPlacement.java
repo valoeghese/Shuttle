@@ -1,5 +1,7 @@
 package tk.valoeghese.shuttle.api.world.gen;
 
-public class GeneratorPlacement {
+import net.minecraft.world.gen.decorator.ConfiguredDecorator;
 
+public interface GeneratorPlacement {
+	ConfiguredDecorator<?> createVanillaDecorator();
 }
