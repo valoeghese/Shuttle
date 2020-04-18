@@ -17,7 +17,6 @@ import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
 import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 import tk.valoeghese.shuttle.impl.world.interact.WorldImpl;
 
 @Mixin(BlockItem.class)
@@ -32,7 +31,7 @@ public class MixinBlockItem {
 			PlayerBlockPlacementContext context = new PlayerBlockPlacementContext(
 					new PlayerImpl((ServerPlayerEntity) entity),
 					new WorldImpl((ServerWorld) placementContext.getWorld()),
-					BlockImpl.of(state == null ? null : state.getBlock()),
+					state == null ? null : Wrappers.wrap(state),
 					Wrappers.wrap(placementContext.getBlockPos()));
 
 			// post event
@@ -46,7 +45,7 @@ public class MixinBlockItem {
 				((ServerPlayerEntity) entity).networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(-2, selectedSlot, entity.inventory.getInvStack(selectedSlot)));
 			} else if (result == EventResult.SUCCESS || (state != null && context.blockModified())) {
 				// also check for non-null results in case block is changed.
-				info.setReturnValue(context.blockModified() ? context.getBlock().getRawBlock().getDefaultState() : state);
+				info.setReturnValue(context.blockModified() ? Wrappers.unwrap(context.getBlock()) : state);
 			}
 		}
 	}

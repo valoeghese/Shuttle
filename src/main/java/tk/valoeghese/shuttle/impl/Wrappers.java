@@ -15,6 +15,7 @@ import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.util.Vec3d;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.block.BlockProperty;
+import tk.valoeghese.shuttle.impl.world.block.BlockStateImpl;
 
 public final class Wrappers {
 	public static BlockPos wrap(net.minecraft.util.math.BlockPos pos) {
@@ -28,6 +29,10 @@ public final class Wrappers {
 	public static BlockState unwrap(Block block) {
 		return BLOCK_STATE_CACHE.computeIfAbsent(block, I2OF)
 				.computeIfAbsent(Arrays.hashCode(block.getStateModifiers()), i -> compute(block));
+	}
+
+	public static Block wrap(BlockState state) {
+		return new BlockStateImpl(state);
 	}
 
 	private static BlockState compute(Block block) {

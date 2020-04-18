@@ -3,13 +3,29 @@ package tk.valoeghese.shuttle.impl.world.block;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.state.property.Property;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.block.BlockProperty;
 
 public class BlockStateImpl extends AbstractBlockImpl {
-	public BlockStateImpl(BlockImpl parent, Map<String, String> properties) {
-		super(properties);
+	BlockStateImpl(BlockImpl parent, Map<String, String> properties) {
+		super(() -> properties);
 		this.parent = parent;
+	}
+
+	public BlockStateImpl(BlockState vanilla) {
+		super(() -> {
+			Map<String, String> result = new HashMap<>();
+			// iterate over block properties
+			for (Property<?> property : vanilla.getProperties()) {
+				// add property to map
+				result.put(property.getName(), vanilla.get(property).toString());
+			}
+			return result;
+		});
+
+		this.parent = BlockImpl.of(vanilla.getBlock());
 	}
 
 	private final BlockImpl parent;

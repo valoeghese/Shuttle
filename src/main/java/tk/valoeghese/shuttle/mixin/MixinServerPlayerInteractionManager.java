@@ -27,7 +27,7 @@ public class MixinServerPlayerInteractionManager {
 		PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
 				new PlayerImpl(invokedOn),
 				new WorldImpl((ServerWorld) world),
-				BlockImpl.of(world.getBlockState(pos).getBlock()),
+				Wrappers.wrap(world.getBlockState(pos)),
 				Wrappers.wrap(pos));
 
 		// post event

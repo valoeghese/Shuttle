@@ -5,7 +5,7 @@ import net.minecraft.world.IWorld;
 import tk.valoeghese.shuttle.api.util.BlockPos;
 import tk.valoeghese.shuttle.api.world.World;
 import tk.valoeghese.shuttle.api.world.block.Block;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
+import tk.valoeghese.shuttle.impl.Wrappers;
 
 public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 	public AbstractWorldImpl(T parent) {
@@ -17,7 +17,7 @@ public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 	@Override
 	public Block getBlock(int x, int y, int z) {
 		POS.set(x, y, z);
-		return BlockImpl.of(this.parent.getBlockState(POS).getBlock());
+		return Wrappers.wrap(this.parent.getBlockState(POS));
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public abstract class AbstractWorldImpl<T extends IWorld> implements World {
 	@Override
 	public boolean setBlock(int x, int y, int z, Block block) {
 		POS.set(x, y, z);
-		return this.parent.setBlockState(POS, block.getRawBlock().getDefaultState(), 3);
+		return this.parent.setBlockState(POS, Wrappers.unwrap(block), 3);
 	}
 
 	@Override

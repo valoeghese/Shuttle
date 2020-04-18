@@ -7,8 +7,8 @@ import tk.valoeghese.shuttle.api.util.Vec2i;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.world.DimensionUtils;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 
 public class GeneratingChunkImpl implements GeneratingChunk {
 	public GeneratingChunkImpl(IWorld region, Chunk chunk) {
@@ -29,14 +29,14 @@ public class GeneratingChunkImpl implements GeneratingChunk {
 	@Override
 	public Block getBlock(int x, int y, int z) {
 		POS.set(x, y, z);
-		return BlockImpl.of(this.chunk.getBlockState(POS).getBlock());
+		return Wrappers.wrap(this.chunk.getBlockState(POS));
 	}
 
 	@Override
 	public void setBlock(int x, int y, int z, Block block) {
 		this.modified = true;
 		POS.set(x, y, z);
-		this.chunk.setBlockState(POS, block.getRawBlock().getDefaultState(), false);
+		this.chunk.setBlockState(POS, Wrappers.unwrap(block), false);
 	}
 
 	@Override

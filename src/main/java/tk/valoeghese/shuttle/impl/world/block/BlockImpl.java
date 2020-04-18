@@ -4,15 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import tk.valoeghese.shuttle.api.world.block.BlockProperty;
 
 public class BlockImpl extends AbstractBlockImpl {
 	private BlockImpl(Block block, String registryName) {
-		super(new HashMap<>());
+		super(() -> {
+			Map<String, String> result = new HashMap<>();
+			// get default state
+			BlockState defaultState = block.getDefaultState();
+			// iterate over block properties
+			for (Property<?> property : defaultState.getProperties()) {
+				// add property to map
+				result.put(property.getName(), defaultState.get(property).toString());
+			}
+			return result;
+		});
+
 		this.parent = block;
 		this.registryName = registryName;
+
 		this.states.put(this.properties, this);
 	}
 
@@ -37,7 +51,7 @@ public class BlockImpl extends AbstractBlockImpl {
 
 	@Override
 	public AbstractBlockImpl withProperty(BlockProperty property) {
-		Map<String, String> resultProperties = new HashMap<>();
+		Map<String, String> resultProperties = new HashMap<>(this.properties);
 		resultProperties.put(property.getName(), property.getValue());
 		return this.states.computeIfAbsent(resultProperties, l -> new BlockStateImpl(this, resultProperties));
 	}

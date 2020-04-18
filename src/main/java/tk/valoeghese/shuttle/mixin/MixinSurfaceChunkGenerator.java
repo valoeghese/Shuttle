@@ -14,7 +14,7 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.world.interact.GeneratingChunkImpl;
 
 @Mixin(SurfaceChunkGenerator.class)
@@ -32,8 +32,8 @@ public abstract class MixinSurfaceChunkGenerator<T extends ChunkGeneratorConfig>
 		// create context for chunk shape
 		ChunkShapeContext context = new ChunkShapeContext(
 				new GeneratingChunkImpl(region, chunk),
-				BlockImpl.of(this.getConfig().getDefaultBlock().getBlock()),
-				BlockImpl.of(this.getConfig().getDefaultFluid().getBlock()),
+				Wrappers.wrap(this.getConfig().getDefaultBlock()),
+				Wrappers.wrap(this.getConfig().getDefaultFluid()),
 				rand
 				);
 		// post event

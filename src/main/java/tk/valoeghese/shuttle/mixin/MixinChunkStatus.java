@@ -12,7 +12,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
 import tk.valoeghese.shuttle.impl.Targets;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.world.interact.GeneratingChunkImpl;
 
 @Mixin(ChunkStatus.class)
@@ -26,8 +26,8 @@ public class MixinChunkStatus {
 		// create context for chunk shape
 		ReplaceBlocksContext context = new ReplaceBlocksContext(
 				new GeneratingChunkImpl(region, chunk),
-				BlockImpl.of(generator.getConfig().getDefaultBlock().getBlock()),
-				BlockImpl.of(generator.getConfig().getDefaultFluid().getBlock()),
+				Wrappers.wrap(generator.getConfig().getDefaultBlock()),
+				Wrappers.wrap(generator.getConfig().getDefaultFluid()),
 				rand
 				);
 		// post event

@@ -30,6 +30,11 @@ public interface Block {
 	 * @return the vanilla registry id of the block.
 	 */
 	String getRegistryName();
+	/**
+	 * @param other the block to compare with
+	 * @return whether the blocks are of the same type, regardless of state
+	 */
+	boolean isSameTypeAs(Block other);
 
 	/**
 	 * @return a block for the given registry id. For example, minecraft:dirt gives an instance representing dirt.

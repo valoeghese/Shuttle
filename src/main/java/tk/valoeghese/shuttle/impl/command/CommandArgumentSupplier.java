@@ -13,8 +13,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
 import tk.valoeghese.shuttle.api.item.Item;
 import tk.valoeghese.shuttle.api.world.block.Block;
+import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.item.ItemImpl;
-import tk.valoeghese.shuttle.impl.world.block.BlockImpl;
 
 public class CommandArgumentSupplier implements CommandArguments {
 	public CommandArgumentSupplier(CommandContext<ServerCommandSource> src) {
@@ -35,7 +35,7 @@ public class CommandArgumentSupplier implements CommandArguments {
 
 	@Override
 	public Block getBlock(String name) {
-		return BlockImpl.of(BlockStateArgumentType.getBlockState(this.parent, name).getBlockState().getBlock());
+		return Wrappers.wrap(BlockStateArgumentType.getBlockState(this.parent, name).getBlockState());
 	}
 
 	@Override
