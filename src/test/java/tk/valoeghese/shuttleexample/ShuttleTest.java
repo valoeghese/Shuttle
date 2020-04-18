@@ -28,11 +28,13 @@ import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimensions;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
+import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleReplaceBlocksEvent;
 
 public class ShuttleTest extends ShuttlePlugin
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
-ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent {
+ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {
@@ -120,28 +122,53 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent {
 	}
 
 	public static final Block GOLD_BLOCK = Block.get("minecraft:gold_block");
+	public static final Block AIR = Block.get("minecraft:air");
+	private static final Block DIAMOND_BLOCK = Block.get("minecraft:diamond_block");
 
 	@Override
-	public void onChunkShape(ChunkShapeContext context) {
+	public EventResult onReplaceBlocks(ReplaceBlocksContext context) {
+		System.out.println("ON REPLACE BLOCKS");
 		GeneratingChunk chunk = context.getChunk();
 
 		// If in the nether
 		if (chunk.getDimension() == Dimensions.NETHER) {
 			Random random = context.getRandom();
 
-			// a random one-in-three chance per chunk
-			if (random.nextInt(3) == 0) {
-				// pick local chunk x and z at random
-				int x = random.nextInt(16);
-				int z = random.nextInt(16);
+			// a random 50% chance for the chunk to have it
+			if (random.nextInt(2) == 0) {
+				// count 5
+				for (int i = 0; i < 5; ++i ) {
+					// pick local chunk x and z at random
+					int x = random.nextInt(16);
+					int z = random.nextInt(16);
 
-				// count down from y = 127 to y = 0
-				for (int y = 127; y >= 0; --y) {
-					// one in 5 chance to set gold block
-					if (random.nextInt(5) == 0) {
-						if (chunk.getBlock(x, y, z) == context.getDefaultBlock()) {
-							chunk.setBlock(x, y, z, GOLD_BLOCK);
+					// count down from y = 127 to y = 0
+					for (int y = 127; y >= 0; --y) {
+						// one in 3 chance to set gold block
+						if (random.nextInt(3) == 0) {
+							if (chunk.getBlock(x, y, z) == context.getDefaultBlock()) {
+								chunk.setBlock(x, y, z, GOLD_BLOCK);
+							} else if (chunk.getBlock(x, y, z).isSameTypeAs(context.getDefaultBlock())) {
+								chunk.setBlock(x, y, z, DIAMOND_BLOCK);
+							}
 						}
+					}
+				}
+			}
+		}
+
+		return EventResult.PASS;
+	}
+
+	@Override
+	public void onChunkShape(ChunkShapeContext context) {
+		GeneratingChunk chunk = context.getChunk();
+
+		if ((chunk.getChunkX() & 10) == 0) {
+			for (int x = 0; x < 16; ++x) {
+				for (int z = 0; z < 16; ++z) {
+					for (int y = 255; y >= 0; --y) {
+						chunk.setBlock(x, y, z, AIR);
 					}
 				}
 			}

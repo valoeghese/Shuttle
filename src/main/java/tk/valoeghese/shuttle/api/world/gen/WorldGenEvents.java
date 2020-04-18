@@ -18,7 +18,11 @@ public final class WorldGenEvents {
 
 	/**
 	 * Event subscriber which is called after the chunk generator shapes a chunk. Use this to alter the base shape of the chunk.
-	 * The chunk usually consists of air, stone, and water at this stage of generation.
+	 * The chunk usually consists of<br/>
+	 *    - air, stone, and water (overworld)<br/>
+	 *    - air, netherrack, and lava (nether)<br/>
+	 *    - air and end stone (the end)<br/>
+	 *  at this stage of generation.
 	 */
 	public static interface ShuttleChunkShapeEvent extends ShuttleEventListener {
 		/**
@@ -29,7 +33,11 @@ public final class WorldGenEvents {
 
 	/**
 	 * Event subscriber which is called before the chunk generator replaces the base blocks with biome specific blocks in a chunk. Use this to alter the blocks of a chunk.
-	 * The chunk usually consists of air, stone, and water at this stage of generation.
+	 * The chunk usually consists of<br/>
+	 *    - air, stone, and water (overworld)<br/>
+	 *    - air, netherrack, and lava (nether)<br/>
+	 *    - air and end stone (the end)<br/>
+	 *  at this stage of generation.
 	 */
 	public static interface ShuttleReplaceBlocksEvent extends ShuttleEventListener {
 		/**
@@ -57,14 +65,14 @@ public final class WorldGenEvents {
 		private final Random random;
 
 		/**
-		 * @return the default block of the chunk, used to represent where there will be a solid block. Usually stone.
+		 * @return the default block of the chunk, used to represent where there will be a solid block. Usually stone in the overworld, netherrack in the nether, and end stone in the end.
 		 */
 		public Block getDefaultBlock() {
 			return this.defaultBlock;
 		}
 
 		/**
-		 * @return the default fluid of the chunk, used to represent where there will be a fluid due to being under sea level. Usually water.
+		 * @return the default fluid of the chunk, used to represent where there will be a fluid due to being under sea level. Usually water in the overworld, lava in the nether, and air in the end.
 		 */
 		public Block getDefaultFluid() {
 			return this.defaultFluid;
@@ -102,14 +110,14 @@ public final class WorldGenEvents {
 		private boolean cancelVanilla = false;
 
 		/**
-		 * @return the default block of the chunk, used to represent where there will be a solid block. Usually stone.
+		 * @return the default block of the chunk, used to represent where there will be a solid block. In the overworld this is usually stone.
 		 */
 		public Block getDefaultBlock() {
 			return this.defaultBlock;
 		}
 
 		/**
-		 * @return the default fluid of the chunk, used to represent where there will be a fluid due to being under sea level. Usually water.
+		 * @return the default fluid of the chunk, used to represent where there will be a fluid due to being under sea level. In the overworld this is usually water.
 		 */
 		public Block getDefaultFluid() {
 			return this.defaultFluid;
