@@ -127,7 +127,6 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 
 	@Override
 	public EventResult onReplaceBlocks(ReplaceBlocksContext context) {
-		System.out.println("ON REPLACE BLOCKS");
 		GeneratingChunk chunk = context.getChunk();
 
 		// If in the nether
