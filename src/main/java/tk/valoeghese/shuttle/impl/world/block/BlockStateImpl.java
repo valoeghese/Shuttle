@@ -1,7 +1,7 @@
 package tk.valoeghese.shuttle.impl.world.block;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.block.BlockProperty;
@@ -31,8 +31,8 @@ public class BlockStateImpl extends AbstractBlockImpl {
 
 	@Override
 	public AbstractBlockImpl withProperty(BlockProperty property) {
-		List<BlockProperty> resultList = new ArrayList<>(this.properties);
-		resultList.add(property);
-		return this.states.computeIfAbsent(resultList, l -> new BlockStateImpl(this, resultList));
+		Map<String, String> resultProperties = new HashMap<>(this.properties);
+		resultProperties.put(property.getName(), property.getValue());
+		return this.parent.states.computeIfAbsent(resultProperties, l -> new BlockStateImpl(this.parent, resultProperties));
 	}
 }
