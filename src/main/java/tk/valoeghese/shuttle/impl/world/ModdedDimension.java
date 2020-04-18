@@ -3,10 +3,10 @@ package tk.valoeghese.shuttle.impl.world;
 import net.minecraft.world.dimension.DimensionType;
 import tk.valoeghese.shuttle.api.world.dimension.Dimension;
 
-public class ModdedDimension implements Dimension {
+public final class ModdedDimension implements Dimension {
 	private ModdedDimension(int id, String registryName, DimensionType parent) {
-		this.id = id
-				this.registryName =  registryName;
+		this.id = id;
+		this.registryName =  registryName;
 	}
 
 	private final int id;
@@ -14,14 +14,15 @@ public class ModdedDimension implements Dimension {
 
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.id;
 	}
 
 	@Override
 	public String getRegistryName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.registryName;
 	}
 
+	public static Dimension createNew(int id, String registryName, DimensionType parent) {
+		return new ModdedDimension(id, registryName, parent);
+	}
 }

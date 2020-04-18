@@ -7,6 +7,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.dimension.DimensionType;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
@@ -33,6 +34,12 @@ public class Shuttle implements ModInitializer {
 		RegistryEntryAddedCallback.event(Registry.BIOME).register((id, registryName, biome) -> {
 			BiomeSetupContextImpl context = new BiomeSetupContextImpl(biome);
 			ShuttleEvents.PER_BIOME_SETUP.postEvent(context);
+		});
+
+		Registry.DIMENSION_TYPE.forEach(dimension -> {
+			if (dimension != DimensionType.OVERWORLD && dimension != DimensionType.THE_NETHER && dimension != DimensionType.THE_END) {
+				
+			}
 		});
 	}
 
