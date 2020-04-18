@@ -14,20 +14,6 @@ public class BlockStateImpl extends AbstractBlockImpl {
 		this.parent = parent;
 	}
 
-	private BlockStateImpl(BlockState vanilla) {
-		super(() -> {
-			Map<String, String> result = new HashMap<>();
-			// iterate over block properties
-			for (Property<?> property : vanilla.getProperties()) {
-				// add property to map
-				result.put(property.getName(), vanilla.get(property).toString());
-			}
-			return result;
-		});
-
-		this.parent = BlockImpl.of(vanilla.getBlock());
-	}
-
 	private final BlockImpl parent;
 
 	@Override
@@ -56,7 +42,16 @@ public class BlockStateImpl extends AbstractBlockImpl {
 		if (state.getBlock().getDefaultState() == state) {
 			return BlockImpl.of(state.getBlock());
 		} else {
-			return new BlockStateImpl(state);
+			Map<String, String> propertyMap = new HashMap<>();
+			// iterate over block properties
+			for (Property<?> property : state.getProperties()) {
+				// add property to map
+				propertyMap.put(property.getName(), state.get(property).toString());
+			}
+
+			BlockImpl block = BlockImpl.of(state.getBlock());
+			return block.states
+					.computeIfAbsent(propertyMap, pm -> new BlockStateImpl(block, pm));
 		}
 	}
 }
