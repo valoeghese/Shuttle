@@ -148,9 +148,6 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 						if (random.nextInt(3) == 0) {
 							if (chunk.getBlock(x, y, z) == context.getDefaultBlock()) {
 								chunk.setBlock(x, y, z, GOLD_BLOCK);
-							} else if (chunk.getBlock(x, y, z).isSameTypeAs(context.getDefaultBlock())) {
-								// shouldn't happen, since it should be an identical instance
-								chunk.setBlock(x, y, z, DIAMOND_BLOCK);
 							}
 						}
 					}
