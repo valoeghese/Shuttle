@@ -32,7 +32,7 @@ public final class Wrappers {
 	}
 
 	public static Block wrap(BlockState state) {
-		return new BlockStateImpl(state);
+		return BlockStateImpl.blockOf(state);
 	}
 
 	private static BlockState compute(Block block) {
