@@ -29,7 +29,7 @@ public interface GeneratorPlacement {
 		 * Creates a generator placement that specifies blocks along the surface of the world, with the specified count of times to generate.
 		 * @param count the number of times to generate the {@link Generator generator}.
 		 */
-		static GeneratorPlacement surfaceHeightmap(int count) {
+		public static GeneratorPlacement surfaceHeightmap(int count) {
 			return new CountHeightmapPlacement(count);
 		}
 
@@ -39,7 +39,7 @@ public interface GeneratorPlacement {
 		 * @param minY the minimum y at which to generate the generator.
 		 * @param maxY the maximum y at which to generate the generator.
 		 */
-		static GeneratorPlacement onFloorWithinRange(int count, int minY, int maxY) {
+		public static GeneratorPlacement onFloorWithinRange(int count, int minY, int maxY) {
 			return new CountHeightRangeSolidBottomPlacement(count, minY, maxY);
 		}
 	}
@@ -52,7 +52,7 @@ public interface GeneratorPlacement {
 		 * Creates a generator placement that specifies blocks along the surface of the world, with the specified chance of generation per chunk.
 		 * @param chance the generator has a 1/chance chance of generating per chunk
 		 */
-		static GeneratorPlacement surfaceHeightmap(int chance) {
+		public static GeneratorPlacement surfaceHeightmap(int chance) {
 			return new ChanceHeightmapPlacement(chance);
 		}
 	}

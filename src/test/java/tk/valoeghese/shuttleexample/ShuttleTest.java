@@ -19,14 +19,18 @@ import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionConte
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockPlacementContext;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockBreakEvent;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.ShuttlePlayerBlockPlaceEvent;
+import tk.valoeghese.shuttle.api.server.SetupEvents.BiomeSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.CommandSetupContext;
 import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttleCommandSetup;
+import tk.valoeghese.shuttle.api.server.SetupEvents.ShuttlePerBiomeSetupEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.ShuttleTimerEvent;
 import tk.valoeghese.shuttle.api.server.TickEvents.TickContext;
 import tk.valoeghese.shuttle.api.util.ChunkPos;
 import tk.valoeghese.shuttle.api.world.block.Block;
 import tk.valoeghese.shuttle.api.world.dimension.Dimensions;
 import tk.valoeghese.shuttle.api.world.gen.GeneratingChunk;
+import tk.valoeghese.shuttle.api.world.gen.Generator;
+import tk.valoeghese.shuttle.api.world.gen.GeneratorPlacement;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ChunkShapeContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleChunkShapeEvent;
@@ -34,7 +38,7 @@ import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ShuttleReplaceBlocksEv
 
 public class ShuttleTest extends ShuttlePlugin
 implements ShuttleTimerEvent, ShuttleCommandSetup, ShuttleWorldDataEvent, ShuttlePlayerBlockBreakEvent,
-ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent {
+ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent, ShuttlePerBiomeSetupEvent {
 	@Override
 	public void onTimerCountdown(TickContext context) {
 		for (Player player : context.getPlayers()) {
@@ -170,5 +174,12 @@ ShuttlePlayerBlockPlaceEvent, ShuttleChunkShapeEvent, ShuttleReplaceBlocksEvent 
 				}
 			}
 		}
+	}
+
+	public static final Generator END_CITY_CHEST = new EndCityChestGenerator();
+
+	@Override
+	public void setupBiome(BiomeSetupContext context) {
+		context.addSurfaceStructure(END_CITY_CHEST, GeneratorPlacement.Chance.surfaceHeightmap(3));
 	}
 }
