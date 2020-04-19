@@ -1,24 +1,24 @@
 package tk.valoeghese.shuttle.api.chat;
 
 public enum ChatColour {
-	BLACK("§0"),
-	DARK_BLUE("§1"),
-	DARK_GREEN("§2"),
-	DARK_AQUA("§3"),
-	DARK_RED("§4"),
-	DARK_PURPLE("§5"),
-	GOLD("§6"),
-	GRAY("§7"),
-	GREY("§7"),
-	DARK_GRAY("§8"),
-	DARK_GREY("§8"),
-	BLUE("§9"),
-	GREEN("§a"),
-	AQUA("§b"),
-	RED("§c"),
-	LIGHT_PURPLE("§d"),
-	YELLOW("§e"),
-	WHITE("§f");
+	BLACK("\u00A70"),
+	DARK_BLUE("\u00A71"),
+	DARK_GREEN("\u00A72"),
+	DARK_AQUA("\u00A73"),
+	DARK_RED("\u00A74"),
+	DARK_PURPLE("\u00A75"),
+	GOLD("\u00A76"),
+	GRAY("\u00A77"),
+	GREY("\u00A77"),
+	DARK_GRAY("\u00A78"),
+	DARK_GREY("\u00A78"),
+	BLUE("\u00A79"),
+	GREEN("\u00A7a"),
+	AQUA("\u00A7b"),
+	RED("\u00A7c"),
+	LIGHT_PURPLE("\u00A7d"),
+	YELLOW("\u00A7e"),
+	WHITE("\u00A7f");
 
 	private ChatColour(String repr) {
 		this.repr = repr;
