@@ -11,13 +11,13 @@ import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.world.gen.WorldGenEvents.ReplaceBlocksContext;
-import tk.valoeghese.shuttle.impl.Targets;
 import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.world.interact.GeneratingChunkImpl;
 
 @Mixin(ChunkStatus.class)
 public class MixinChunkStatus {
-	@Redirect(at = @At(value = "INVOKE", target = Targets.BUILD_SURFACE), method = "method_16567")
+	@Redirect(at = @At(value = "INVOKE", target = "net/minecraft/world/gen/chunk/ChunkGenerator.buildSurface(Lnet/minecraft/world/ChunkRegion;Lnet/minecraft/world/chunk/Chunk;)V"),
+			method = "method_16567")
 	private static void onBuildSurface(ChunkGenerator<?> generator, ChunkRegion region, Chunk chunk) {
 		// create random
 		ChunkRandom rand = new ChunkRandom();

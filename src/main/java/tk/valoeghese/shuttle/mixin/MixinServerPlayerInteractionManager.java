@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 import tk.valoeghese.shuttle.api.event.EventResult;
 import tk.valoeghese.shuttle.api.event.ShuttleEvents;
 import tk.valoeghese.shuttle.api.player.PlayerEvents.PlayerBlockInteractionContext;
-import tk.valoeghese.shuttle.impl.Targets;
 import tk.valoeghese.shuttle.impl.Wrappers;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 import tk.valoeghese.shuttle.impl.world.interact.WorldImpl;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public class MixinServerPlayerInteractionManager {
-	@Redirect(at = @At(value = "INVOKE", target = Targets.CANT_MINE), method = "tryBreakBlock(Lnet/minecraft/util/math/BlockPos;)Z")
+	@Redirect(at = @At(value = "INVOKE", target = "net/minecraft/server/network/ServerPlayerEntity.canMine(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/GameMode;)Z"),
+			method = "tryBreakBlock(Lnet/minecraft/util/math/BlockPos;)Z")
 	private boolean onBlockBreak(ServerPlayerEntity invokedOn, World world, BlockPos pos, GameMode gamemode) {
 		// create context
 		PlayerBlockInteractionContext context = new PlayerBlockInteractionContext(
