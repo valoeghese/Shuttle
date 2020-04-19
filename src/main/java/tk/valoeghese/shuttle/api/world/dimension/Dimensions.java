@@ -2,6 +2,7 @@ package tk.valoeghese.shuttle.api.world.dimension;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.dimension.DimensionType;
+import tk.valoeghese.shuttle.Unstable;
 
 /**
  * Enum representing the vanilla dimensions.
@@ -18,6 +19,12 @@ public enum Dimensions implements Dimension {
 
 	private final DimensionType parent;
 	private final String registryName;
+
+	@Override
+	@Unstable
+	public DimensionType getRawDimension() {
+		return this.parent;
+	}
 
 	@Override
 	public int getId() {

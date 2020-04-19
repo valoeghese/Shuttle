@@ -39,4 +39,16 @@ public interface Player extends CommandExecutor {
 	 * @return the dimension the player is in.
 	 */
 	Dimension getDimension();
+	/**
+	 * @param position the position to teleport to in the dimension.
+	 * @param dimension the dimension to teleport to.
+	 * @return whether the player was successfully teleported.
+	 */
+	boolean teleportDimension(Vec3d position, Dimension dimension);
+	/**
+	 * @param position the position to teleport to in the dimension.
+	 * @param dimension the dimension to teleport to.
+	 * @return whether the player was successfully teleported.
+	 */
+	boolean teleportDimension(BlockPos position, Dimension dimension);
 }

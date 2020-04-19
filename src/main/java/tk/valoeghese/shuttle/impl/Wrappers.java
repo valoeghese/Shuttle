@@ -142,6 +142,14 @@ public final class Wrappers {
 		}
 	}
 
+	public static net.minecraft.util.math.BlockPos unwrap(BlockPos pos) {
+		return new net.minecraft.util.math.BlockPos(pos.x, pos.y, pos.z);
+	}
+
+	public static net.minecraft.util.math.Vec3d unwrap(Vec3d vector) {
+		return new net.minecraft.util.math.Vec3d(vector.x, vector.y, vector.z);
+	}
+
 	private static final Function<Block, Int2ObjectMap<BlockState>> I2OF = b -> new Int2ObjectArrayMap<>();
 	private static final Map<Block, Int2ObjectMap<BlockState>> BLOCK_STATE_CACHE = new HashMap<>();
 }

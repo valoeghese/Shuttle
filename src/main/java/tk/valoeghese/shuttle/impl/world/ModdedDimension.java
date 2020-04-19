@@ -22,4 +22,9 @@ public final class ModdedDimension implements Dimension {
 	public String getRegistryName() {
 		return this.registryName;
 	}
+
+	@Override
+	public DimensionType getRawDimension() {
+		return this.parent;
+	}
 }
