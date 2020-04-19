@@ -9,6 +9,6 @@ import tk.valoeghese.shuttle.api.world.gen.Generator;
 public final class EndCityChestGenerator implements Generator {
 	@Override
 	public boolean generate(World world, Random random, int chunkStartX, int chunkStartZ, BlockPos placement) {
-		return world.setLootChest(placement, "minecraft:chests/end_city_treasure");
+		return world.setLootChest(placement, random, "minecraft:chests/end_city_treasure");
 	}
 }
