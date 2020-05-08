@@ -4,13 +4,13 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import net.fabricmc.fabric.api.registry.CommandRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import tk.valoeghese.shuttle.api.command.Command;
 import tk.valoeghese.shuttle.api.command.CommandExecutor;
 import tk.valoeghese.shuttle.api.command.CommandRuntimeInfo;
 import tk.valoeghese.shuttle.api.command.arg.CommandArguments;
-import tk.valoeghese.shuttle.api.player.Player;
 import tk.valoeghese.shuttle.impl.player.PlayerImpl;
 
 public class BrigadierCommandBuilder {
@@ -43,7 +43,7 @@ public class BrigadierCommandBuilder {
 				CommandArguments arguments = new CommandArgumentSupplier(context);
 				ServerCommandSource source = context.getSource();
 				// command executor
-				CommandExecutor executor = (source.getEntity() instanceof Player) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
+				CommandExecutor executor = (source.getEntity() instanceof PlayerEntity) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
 				return parent.execute(arguments, new CommandRuntimeInfo(executor, source.getMinecraftServer())) ? 1 : 0;
 			});
 		} else {
@@ -51,7 +51,7 @@ public class BrigadierCommandBuilder {
 				CommandArguments arguments = new CommandArgumentSupplier(context);
 				ServerCommandSource source = context.getSource();
 				// command executor
-				CommandExecutor executor = (source.getEntity() instanceof Player) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
+				CommandExecutor executor = (source.getEntity() instanceof PlayerEntity) ? new PlayerImpl(source.getPlayer()) : new GenericCommandExecutor(source);
 				return parent.execute(arguments, new CommandRuntimeInfo(executor, source.getMinecraftServer())) ? 1 : 0;
 			});
 		}

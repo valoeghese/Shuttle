@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "shuttle",
-  "version": "0.3.0-alpha",
+  "version": "0.3.1-alpha",
 
   "name": "Shuttle",
   "description": "Library/API for server side code",
