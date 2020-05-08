@@ -122,6 +122,13 @@ public class PersistentData {
 		return this.saveName;
 	}
 
+	/**
+	 * @return an array of the keys in this persistent data.
+	 */
+	public String[] getKeys() {
+		return this.tag.getKeys().toArray(new String[0]);
+	}
+
 	private static long toLong(int x, int y) {
 		return ((long) x & 0xFFFFFFFFL) | (((long) y & 0xFFFFFFFFL) << 32);
 	}
